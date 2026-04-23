@@ -42,6 +42,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://your-frontend.onrender.com',
+  'https://aielectionforecastingbot-1.onrender.com',
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
