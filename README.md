@@ -5,6 +5,8 @@
 ![Node.js](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933.svg)
 ![AI](https://img.shields.io/badge/AI_Engine-Groq%20%7C%20Gemini-orange.svg)
 
+**🔴 Live Demo:** [https://aielectionforecastingbot-1.onrender.com](https://aielectionforecastingbot-1.onrender.com)
+
 **Cypher Guard** is a highly advanced, full-stack interactive election forecasting tool. It deploys a sophisticated "Neural Swarm" of AI agents to analyze live web data, historical trends, regional sentiment, and demographic shifts, providing real-time predictive modeling for any global political election.
 
 ---
