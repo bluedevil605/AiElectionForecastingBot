@@ -9,93 +9,124 @@
 
 ---
 
-## 🌟 Key Features
+## 🏗️ 1. System Architecture & High-Level Flow
 
-- **Live Intelligence Gathering:** Scrapes real-time data from search engines and news sources to ground its predictions in reality.
-- **Dual AI Processing Pipeline:** Utilizes ultra-fast **Groq API** as the primary engine with a robust fallback to **Google Gemini**.
-- **Dynamic Streaming Telemetry:** Watch the AI's thought process unfold in real-time as it synthesizes data, calibrates historical bias, and renders its forecast.
-- **Interactive UI Dashboard:** Built with React, Tailwind CSS, Framer Motion, and Recharts, offering an incredibly premium, "glassmorphism" aesthetic.
-- **Dynamic Party Logos:** Automatically fetches and caches high-quality SVG party logos directly from the Wikipedia API.
+Cypher Guard operates on a decoupled client-server architecture designed for speed, security, and real-time feedback.
 
----
-
-## 📥 Input Capabilities
-
-The system allows for highly flexible, natural language interactions:
-
-- **Free-form Natural Language Search:** Users can input any election scenario into the search bar (e.g., *"United Kingdom General Election 2024"*, *"Bihar Assembly Election 2025"*).
-- **Input Validation & Scoping:** A strict validation layer ensures the bot exclusively processes election-related queries. If a user asks a non-political question, the system instantly rejects it, preserving API quotas.
-- **Targeted Parameters:** The backend automatically identifies the region, level of government, and time period from the user's string to tailor its web-scraping logic.
+1. **User Input:** The user submits a natural language query (e.g., *"2024 US Presidential Election"*).
+2. **Input Validation:** The Node.js backend intercepts the request and runs a strict Regex-based validation to ensure the query is explicitly related to politics/elections, preventing abuse of the AI API.
+3. **Caching Layer:** The backend checks an in-memory cache (60-minute TTL). If the exact query was run recently, it returns the cached forecast instantly.
+4. **AI Processing Pipeline:** 
+   - **Primary Engine:** The backend queries the **Groq API** (`llama-3.3-70b-versatile`) for blazing-fast inference via Streaming.
+   - **Fallback Engine:** If Groq fails or hits rate limits, the system seamlessly falls back to **Google Gemini** (`gemini-2.5-flash`) utilizing Google Search grounding to gather real-time web data.
+5. **Streaming Telemetry (SSE):** As the AI generates its response, raw text chunks are streamed back to the frontend via **Server-Sent Events (SSE)**, creating a "hacker-style" live telemetry terminal.
+6. **Data Parsing & UI Rendering:** Once the stream concludes, the backend extracts the structured JSON. The frontend uses this JSON to render interactive charts, dynamic candidate profiles, and geographic maps.
 
 ---
 
-## 📤 Output & Analytics Dashboard
+## 💻 2. Frontend Application (Client)
 
-Upon processing the data, the system generates a comprehensive, JSON-structured response that is seamlessly rendered into the dashboard:
+The frontend is built for maximum visual impact, utilizing a modern tech stack focused on smooth micro-interactions, "glassmorphism", and premium aesthetics.
 
-### 1. **Candidate Profiling**
-- **Detailed Metrics:** Displays the candidate's name, political party, dynamically fetched party logo, win probability (%), projected vote share, and momentum (rising/stable/falling).
-- **Sentiment Meter:** A visual gauge representing the public sentiment score toward the candidate based on recent news and web data.
+### **Tech Stack:**
+- **Framework:** React 18, Vite
+- **Styling:** Tailwind CSS (configured for complex gradients, drop shadows, and dark mode)
+- **State Management:** Zustand (`useElectionStore.js` for centralized, predictable state without prop-drilling)
+- **Animations:** Framer Motion (page transitions, component mounting, hover effects)
+- **Visualizations:** Recharts (pie charts, custom gauges)
 
-### 2. **Macro Forecasting**
-- **Win Probability Gauges:** High-quality circular progress indicators for visual comparison.
-- **Margin of Victory:** Estimates the specific margin between the top candidates.
-- **Confidence Level:** Indicates the model's confidence (High/Medium/Low) based on the volatility of the ingested data.
-
-### 3. **AI Explanations & Risk Factors**
-- **Decisive Factors:** A ranked list of key issues influencing the election (e.g., "Economic Anxiety", "Incumbency Fatigue") with precise impact scores.
-- **Historical Comparison:** Contextualizes current data against previous similar elections.
-- **Risk Vectors:** Highlights wildcard events or shifting demographics that could disrupt the forecast.
-
----
-
-## 🏗️ Architecture & Tech Stack
-
-### Frontend (Client)
-- **Framework:** React + Vite
-- **Styling:** Tailwind CSS (Dark Mode, Glassmorphism, Custom Animations)
-- **Icons & Animations:** Lucide React, Framer Motion
-- **Visualizations:** Recharts, D3 (Geographical Mapping)
-
-### Backend (Server)
-- **Runtime:** Node.js + Express
-- **AI Integration:** Groq SDK, Google Generative AI (Gemini)
-- **Data Gathering:** DuckDuckScrape, Puppeteer, Axios
-- **Security & Rate Limiting:** Express Rate Limit, CORS protection
+### **Core Components:**
+- `SearchBar.jsx`: The primary entry point. Handles the animated input field, triggers the Fetch API via SSE, and renders the live streaming telemetry console.
+- `CompletedElectionDashboard.jsx`: The main layout container for the forecast results.
+- `PartyLogo.jsx`: A dynamic component that intercepts candidate party names and automatically queries the **Wikipedia API** to fetch and render high-resolution SVG party logos in real-time. Includes an in-memory cache to prevent redundant API calls.
+- `ProbabilityGauge.jsx`: A custom SVG visualization using Recharts to display a candidate's win probability as a glowing, circular gauge.
+- `SentimentMeter.jsx`: A visual bar indicating positive/negative public sentiment based on AI web scraping.
+- `AIExplanation.jsx`: Renders the qualitative AI data, including decisive factors, historical comparisons, and critical risk vectors.
 
 ---
 
-## 🚀 Deployment Guide (Render)
+## ⚙️ 3. Backend Application (Server)
 
-This application is fully configured for deployment on [Render](https://render.com/).
+The Node.js server acts as a secure proxy, API gateway, and stream manager.
 
-### 1. Deploy the Backend (Web Service)
-1. Create a new **Web Service** on Render.
-2. Connect this GitHub repository.
-3. **Settings:**
-   - Root Directory: `server`
-   - Build Command: `npm install`
-   - Start Command: `node server.js`
-4. **Environment Variables:**
+### **Tech Stack:**
+- **Runtime:** Node.js, Express.js
+- **Middleware:** CORS, Express Rate Limit (DDoS protection)
+- **AI SDKs:** `groq-sdk`, native `fetch` for Gemini REST API
+
+### **Key Server Mechanics:**
+- **Concurrency Mutex (Lock):** Implements a global `isRequestInProgress` boolean flag. This ensures that only **one** heavy AI forecast can be processed at any given time globally, strictly preventing API rate-limit exhaustion and controlling server costs.
+- **Server-Sent Events (SSE):** Instead of making the user wait 10-15 seconds for a massive JSON payload, the server pipes the AI's internal "thought process" back to the client chunk-by-chunk using `res.write()`.
+- **System Prompting:** The AI is strictly prompted to return a specific JSON schema, enforcing that candidates, margin of victory, and explanations are perfectly structured for the React frontend to parse.
+- **Deep Diagnostics:** Implements a custom `debugLog` function that writes all server events (uncaught exceptions, stream events, fallback triggers) to a persistent `server-debug.log` file.
+
+---
+
+## 🧬 4. Data Structures & Schema
+
+The AI is forced to return data in the exact following schema, which binds the Backend to the Frontend:
+
+```json
+{
+  "election_status": "upcoming" | "ongoing" | "completed",
+  "actual_result": { "winner": "Name", "winner_party": "Party", "vote_share": 51.5, "margin": "1.2%" },
+  "candidates": [
+    { 
+      "name": "Candidate A", 
+      "party": "Party Name", 
+      "winProbability": 65.5, 
+      "projectedVoteShare": 51.2, 
+      "momentum": "rising", 
+      "sentimentScore": 75 
+    }
+  ],
+  "confidenceLevel": "high" | "medium" | "low",
+  "marginOfVictoryEstimate": "String representation",
+  "explanation": {
+    "summary": "2 sentence context.",
+    "topDecisiveFactors": [{"factor": "Economy", "impact": 8.5}],
+    "historicalComparison": "Context against previous election.",
+    "riskFactors": ["Wildcard event 1", "Wildcard event 2"]
+  }
+}
+```
+
+---
+
+## 🚀 5. Deployment Guide (Render)
+
+This application is fully containerized and configured for zero-downtime deployment on [Render](https://render.com/).
+
+### **Step A: Deploy the Node.js Backend**
+1. Log in to Render and create a new **Web Service**.
+2. Connect your GitHub repository.
+3. Configure the build:
+   - **Root Directory:** `server`
+   - **Environment:** `Node`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node server.js`
+4. **Required Environment Variables:**
    - `GEMINI_API_KEY`: Your Google AI Studio Key
    - `GROQ_API_KEY`: Your Groq API Key
-   - `FRONTEND_URL`: URL of your deployed frontend (e.g., `https://my-frontend.onrender.com`)
+   - `FRONTEND_URL`: The URL where your React app will live (e.g., `https://my-frontend.onrender.com`). This is required for CORS.
+5. Deploy. Once live, copy the `onrender.com` backend URL.
 
-### 2. Deploy the Frontend (Static Site)
+### **Step B: Deploy the React Frontend**
 1. Create a new **Static Site** on Render.
-2. Connect this GitHub repository.
-3. **Settings:**
-   - Root Directory: `client`
-   - Build Command: `npm install && npm run build`
-   - Publish Directory: `dist`
-4. **Environment Variables:**
-   - `VITE_API_URL`: The URL of your deployed backend (e.g., `https://my-backend.onrender.com`)
+2. Connect your GitHub repository.
+3. Configure the build:
+   - **Root Directory:** `client`
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `dist`
+4. **Required Environment Variables:**
+   - `VITE_API_URL`: Paste the backend URL you generated in Step A.
+5. Deploy.
 
 ---
 
-## 💻 Local Development Setup
+## 💻 6. Local Development Setup
 
-If you wish to run the project locally:
+To run, modify, or contribute to Cypher Guard locally:
 
 1. **Clone the repository:**
    ```bash
@@ -120,7 +151,7 @@ If you wish to run the project locally:
    npm install
    npm run dev
    ```
-   *The application will be available at `http://localhost:5173`.*
+   *The application will be available at `http://localhost:5173`. Any changes to the React code will hot-reload automatically.*
 
 ---
-*Disclaimer: This tool provides predictive modeling based on publicly available data and AI inference. It does not guarantee actual election results.*
+*Disclaimer: Cypher Guard provides predictive modeling based on publicly available data, LLM web scraping, and AI inference. It does not guarantee actual election results and should be used for analytical and entertainment purposes.*
