@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: 222 47% 4%;
+  --accent-primary: 263 70% 60%;
+  --accent-secondary: 243 75% 59%;
+  --surface-color: 222 47% 6%;
+  --border-color: 222 47% 12%;
+  --text-primary: 0 0% 100%;
+  --text-secondary: 215 20% 65%;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 overflow-x-hidden;
+    background-color: hsl(var(--bg-color));
+  }
+
+  ::selection {
+    @apply bg-indigo-500/30 text-white;
+  }
+}
+
+/* Glassmorphism v2 */
+.glass-panel {
+  @apply backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px 0 rgba(0,0,0,0.5);
+}
+
+.glass-panel-heavy {
+  @apply backdrop-blur-[40px] border border-white/20 shadow-2xl;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.4) 100%);
+  box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.2), 0 20px 40px 0 rgba(0,0,0,0.7);
+}
+
+/* Input Styles */
+.glass-input {
+  @apply bg-slate-900/50 border border-white/10 text-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/30 focus:border-indigo-400 focus:bg-slate-900/80 transition-all placeholder:text-slate-500 shadow-inner;
+  box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.5);
+}
+
+/* Noise Grain effect */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-fuchsia-400;
+}
+
+/* 3D Background Elements */
+.perspective-container {
+  perspective: 600px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.bg-grid-pattern {
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.25) 1px, transparent 1px);
+}
+
+@keyframes grid-flow {
+  0% { 
+    transform: rotateX(75deg) translateY(0) translateZ(-100px); 
+  }
+  100% { 
+    transform: rotateX(75deg) translateY(80px) translateZ(-100px); 
+  }
+}
+
+.animate-grid-flow {
+  animation: grid-flow 3s linear infinite;
+  transform-origin: center top;
+}

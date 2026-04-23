@@ -1,0 +1,588 @@
+2026-04-05T15:25:26.417Z [Process] Server exiting with code: 0
+[2026-04-05T15:54:07.223Z] --- SERVER STARTING ---
+[2026-04-05T15:54:07.314Z] Routers loaded successfully.
+[2026-04-05T15:54:07.333Z] 
+Server listening on port 5000
+[2026-04-05T15:54:07.334Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T15:54:17.334Z] Heartbeat: Event loop active.
+[2026-04-05T15:54:27.344Z] Heartbeat: Event loop active.
+[2026-04-05T15:54:37.962Z] --- SERVER STARTING ---
+[2026-04-05T15:54:38.014Z] Routers loaded successfully.
+[2026-04-05T15:54:38.028Z] 
+Server listening on port 5000
+[2026-04-05T15:54:38.029Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T15:54:48.037Z] Heartbeat: Event loop active.
+[2026-04-05T15:54:58.047Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:08.049Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:18.054Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:28.069Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:38.077Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:48.447Z] Heartbeat: Event loop active.
+[2026-04-05T15:55:58.449Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:08.462Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:18.469Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:28.477Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:38.485Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:48.487Z] Heartbeat: Event loop active.
+[2026-04-05T15:56:58.495Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:08.499Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:18.504Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:28.507Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:38.521Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:48.534Z] Heartbeat: Event loop active.
+[2026-04-05T15:57:58.546Z] Heartbeat: Event loop active.
+[2026-04-05T15:58:08.558Z] Heartbeat: Event loop active.
+[2026-04-05T15:58:18.566Z] Heartbeat: Event loop active.
+[2026-04-05T15:58:28.580Z] Heartbeat: Event loop active.
+[2026-04-05T15:58:38.580Z] Heartbeat: Event loop active.
+[2026-04-05T15:58:45.552Z] --- SERVER STARTING ---
+[2026-04-05T15:58:45.604Z] Routers loaded successfully.
+[2026-04-05T15:58:45.621Z] 
+Server listening on port 5000
+[2026-04-05T15:58:45.622Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T15:58:55.618Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:05.620Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:15.621Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:25.629Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:35.633Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:45.634Z] Heartbeat: Event loop active.
+[2026-04-05T15:59:55.645Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:05.653Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:15.667Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:25.676Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:35.690Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:45.695Z] Heartbeat: Event loop active.
+[2026-04-05T16:00:55.698Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:05.704Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:15.706Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:25.714Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:35.725Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:45.734Z] Heartbeat: Event loop active.
+[2026-04-05T16:01:55.743Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:05.747Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:15.760Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:25.769Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:35.778Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:45.780Z] Heartbeat: Event loop active.
+[2026-04-05T16:02:55.795Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:05.798Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:15.806Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:25.815Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:35.819Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:45.831Z] Heartbeat: Event loop active.
+[2026-04-05T16:03:55.838Z] Heartbeat: Event loop active.
+[2026-04-05T16:04:04.250Z] --- SERVER STARTING ---
+[2026-04-05T16:04:04.301Z] Routers loaded successfully.
+[2026-04-05T16:04:04.315Z] 
+Server listening on port 5000
+[2026-04-05T16:04:04.316Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T16:04:14.314Z] Heartbeat: Event loop active.
+[2026-04-05T16:04:24.319Z] Heartbeat: Event loop active.
+[2026-04-05T16:04:34.324Z] Heartbeat: Event loop active.
+[2026-04-05T16:04:44.324Z] Heartbeat: Event loop active.
+[2026-04-05T16:04:54.335Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:04.348Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:14.353Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:24.357Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:34.368Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:44.373Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:48.620Z] --- SERVER STARTING ---
+[2026-04-05T16:05:48.672Z] Routers loaded successfully.
+[2026-04-05T16:05:48.685Z] 
+Server listening on port 5000
+[2026-04-05T16:05:48.686Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T16:05:48.687Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-04-05T16:05:54.381Z] Heartbeat: Event loop active.
+[2026-04-05T16:05:58.690Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:04.386Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:08.702Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:14.391Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:18.713Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:24.404Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:28.723Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:34.415Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:38.730Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:44.424Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:48.747Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:54.431Z] Heartbeat: Event loop active.
+[2026-04-05T16:06:58.748Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:04.443Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:08.762Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:14.447Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:18.772Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:24.456Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:28.780Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:34.455Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:38.788Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:44.470Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:48.789Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:54.485Z] Heartbeat: Event loop active.
+[2026-04-05T16:07:58.790Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:04.491Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:08.800Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:14.503Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:18.809Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:24.509Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:28.813Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:34.522Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:38.824Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:44.536Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:48.831Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:54.540Z] Heartbeat: Event loop active.
+[2026-04-05T16:08:58.834Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:04.545Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:08.834Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:14.546Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:18.843Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:29.823Z] --- SERVER STARTING ---
+[2026-04-05T16:09:29.877Z] Routers loaded successfully.
+[2026-04-05T16:09:29.891Z] 
+Server listening on port 5000
+[2026-04-05T16:09:29.891Z] Health: http://localhost:5000/api/health
+
+[2026-04-05T16:09:39.895Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:49.910Z] Heartbeat: Event loop active.
+[2026-04-05T16:09:59.915Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:09.922Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:19.937Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:29.945Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:39.949Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:49.956Z] Heartbeat: Event loop active.
+[2026-04-05T16:10:59.965Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:09.969Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:19.970Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:29.974Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:39.979Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:49.984Z] Heartbeat: Event loop active.
+[2026-04-05T16:11:59.992Z] Heartbeat: Event loop active.
+[2026-04-05T16:12:10.002Z] Heartbeat: Event loop active.
+[2026-04-05T16:12:20.010Z] Heartbeat: Event loop active.
+[2026-04-05T16:12:30.021Z] Heartbeat: Event loop active.
+[2026-04-05T16:12:40.022Z] Heartbeat: Event loop active.
+[2026-04-05T16:12:50.023Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:00.026Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:10.041Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:20.044Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:30.057Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:40.062Z] Heartbeat: Event loop active.
+[2026-04-05T16:13:50.065Z] Heartbeat: Event loop active.
+[2026-04-05T16:14:00.071Z] Heartbeat: Event loop active.
+[2026-04-05T16:14:10.085Z] Heartbeat: Event loop active.
+[2026-04-05T16:14:20.088Z] Heartbeat: Event loop active.
+[2026-04-05T16:14:30.089Z] Heartbeat: Event loop active.
+[2026-04-06T14:05:43.483Z] --- SERVER STARTING ---
+[2026-04-06T14:05:43.556Z] Routers loaded successfully.
+[2026-04-06T14:05:43.572Z] 
+Server listening on port 5000
+[2026-04-06T14:05:43.572Z] Health: http://localhost:5000/api/health
+
+[2026-04-06T14:05:53.577Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:03.582Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:13.588Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:23.594Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:33.604Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:43.609Z] Heartbeat: Event loop active.
+[2026-04-06T14:06:53.614Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:03.618Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:13.633Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:23.633Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:33.645Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:43.657Z] Heartbeat: Event loop active.
+[2026-04-06T14:07:53.664Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:03.670Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:13.679Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:23.693Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:33.697Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:43.697Z] Heartbeat: Event loop active.
+[2026-04-06T14:08:53.698Z] Heartbeat: Event loop active.
+[2026-04-06T14:09:03.702Z] Heartbeat: Event loop active.
+[2026-04-06T14:09:10.444Z] Received SIGINT
+[2026-04-06T14:09:10.445Z] [ProcessExit] Code: 0
+[2026-04-06T14:09:12.466Z] --- SERVER STARTING ---
+[2026-04-06T14:09:12.515Z] Routers loaded successfully.
+[2026-04-06T14:09:12.527Z] 
+Server listening on port 5000
+[2026-04-06T14:09:12.527Z] Health: http://localhost:5000/api/health
+
+[2026-04-06T14:09:22.529Z] Heartbeat: Event loop active.
+[2026-04-06T14:09:32.530Z] Heartbeat: Event loop active.
+[2026-04-06T14:09:42.540Z] Heartbeat: Event loop active.
+[2026-04-06T14:09:52.549Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:02.555Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:12.557Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:22.560Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:32.567Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:42.579Z] Heartbeat: Event loop active.
+[2026-04-06T14:10:52.588Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:02.603Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:12.603Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:22.608Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:32.610Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:42.620Z] Heartbeat: Event loop active.
+[2026-04-06T14:11:52.634Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:02.640Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:12.644Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:22.653Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:32.666Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:42.667Z] Heartbeat: Event loop active.
+[2026-04-06T14:12:52.671Z] Heartbeat: Event loop active.
+[2026-04-06T14:13:02.671Z] Heartbeat: Event loop active.
+[2026-04-06T14:13:12.671Z] Heartbeat: Event loop active.
+[2026-04-06T14:13:22.677Z] Heartbeat: Event loop active.
+[2026-04-06T14:13:32.690Z] Heartbeat: Event loop active.
+[2026-04-06T14:13:36.675Z] Received SIGINT
+[2026-04-06T14:13:36.676Z] [ProcessExit] Code: 0
+[2026-04-06T14:21:09.494Z] --- SERVER STARTING ---
+[2026-04-06T14:21:09.506Z] Router Load Error: Error: Cannot find module '../agents/verifyAgent'
+Require stack:
+- C:\Users\Anubhav\Desktop\AiforecastingBot\server\routes\compare.js
+- C:\Users\Anubhav\Desktop\AiforecastingBot\server\server.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at Function._load (node:internal/modules/cjs/loader:1055:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\Anubhav\Desktop\AiforecastingBot\server\routes\compare.js:2:25)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+[2026-04-06T14:21:09.524Z] 
+Server listening on port 5000
+[2026-04-06T14:21:09.525Z] Health: http://localhost:5000/api/health
+
+[2026-04-06T14:25:25.899Z] --- SERVER STARTING ---
+[2026-04-06T14:25:25.906Z] Routers loaded successfully.
+[2026-04-06T14:25:25.920Z] 
+Server listening on port 5000
+[2026-04-06T14:25:25.921Z] Health: http://localhost:5000/api/health
+
+[2026-04-06T14:25:25.921Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-04-06T14:25:25.922Z] [ProcessExit] Code: 0
+[2026-04-06T14:27:57.184Z] --- SERVER STARTING ---
+[2026-04-06T14:27:57.190Z] Routers loaded successfully.
+[2026-04-06T14:27:57.204Z] 
+Server listening on port 5000
+[2026-04-06T14:27:57.205Z] Health: http://localhost:5000/api/health
+
+[2026-04-08T04:24:17.394Z] --- SERVER STARTING ---
+[2026-04-08T04:24:17.404Z] Routers loaded successfully.
+[2026-04-08T04:24:17.444Z] 
+Server listening on port 5000
+[2026-04-08T04:24:17.445Z] Health: http://localhost:5000/api/health
+
+[2026-04-08T04:26:04.612Z] Received SIGINT
+[2026-04-08T04:26:04.613Z] [ProcessExit] Code: 0
+[2026-04-08T04:26:06.336Z] --- SERVER STARTING ---
+[2026-04-08T04:26:06.345Z] Routers loaded successfully.
+[2026-04-08T04:26:06.370Z] 
+Server listening on port 5000
+[2026-04-08T04:26:06.371Z] Health: http://localhost:5000/api/health
+
+[2026-04-08T04:37:43.593Z] Received SIGINT
+[2026-04-08T04:37:43.595Z] [ProcessExit] Code: 0
+[2026-04-13T06:42:17.149Z] --- SERVER STARTING ---
+[2026-04-13T06:42:17.158Z] Routers loaded successfully.
+[2026-04-13T06:42:17.186Z] 
+Server listening on port 5000
+[2026-04-13T06:42:17.187Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T06:49:25.710Z] Received SIGINT
+[2026-04-13T06:49:25.712Z] [ProcessExit] Code: 0
+[2026-04-13T06:49:27.924Z] --- SERVER STARTING ---
+[2026-04-13T06:49:27.933Z] Routers loaded successfully.
+[2026-04-13T06:49:27.969Z] 
+Server listening on port 5000
+[2026-04-13T06:49:27.972Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T06:51:13.404Z] Received SIGINT
+[2026-04-13T06:51:13.405Z] [ProcessExit] Code: 0
+[2026-04-13T06:51:15.523Z] --- SERVER STARTING ---
+[2026-04-13T06:51:15.535Z] Routers loaded successfully.
+[2026-04-13T06:51:15.558Z] 
+Server listening on port 5000
+[2026-04-13T06:51:15.559Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T06:55:11.495Z] Received SIGINT
+[2026-04-13T06:55:11.498Z] [ProcessExit] Code: 0
+[2026-04-13T06:57:59.150Z] --- SERVER STARTING ---
+[2026-04-13T06:57:59.168Z] Routers loaded successfully.
+[2026-04-13T06:57:59.207Z] 
+Server listening on port 5000
+[2026-04-13T06:57:59.209Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T07:02:00.424Z] Received SIGINT
+[2026-04-13T07:02:00.427Z] [ProcessExit] Code: 0
+[2026-04-13T07:02:02.349Z] --- SERVER STARTING ---
+[2026-04-13T07:02:02.361Z] Routers loaded successfully.
+[2026-04-13T07:02:02.387Z] 
+Server listening on port 5000
+[2026-04-13T07:02:02.387Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T07:05:14.612Z] Received SIGINT
+[2026-04-13T07:05:14.614Z] [ProcessExit] Code: 0
+[2026-04-13T07:05:17.549Z] --- SERVER STARTING ---
+[2026-04-13T07:05:17.563Z] Routers loaded successfully.
+[2026-04-13T07:05:17.608Z] 
+Server listening on port 5000
+[2026-04-13T07:05:17.610Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T07:09:12.807Z] Received SIGINT
+[2026-04-13T07:09:12.809Z] [ProcessExit] Code: 0
+[2026-04-13T07:09:15.626Z] --- SERVER STARTING ---
+[2026-04-13T07:09:15.644Z] Routers loaded successfully.
+[2026-04-13T07:09:15.680Z] 
+Server listening on port 5000
+[2026-04-13T07:09:15.681Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T07:11:43.558Z] Received SIGINT
+[2026-04-13T07:11:43.559Z] [ProcessExit] Code: 0
+[2026-04-13T07:11:45.295Z] --- SERVER STARTING ---
+[2026-04-13T07:11:45.312Z] Routers loaded successfully.
+[2026-04-13T07:11:45.350Z] 
+Server listening on port 5000
+[2026-04-13T07:11:45.351Z] Health: http://localhost:5000/api/health
+
+[2026-04-13T07:14:39.168Z] Received SIGINT
+[2026-04-13T07:14:39.170Z] [ProcessExit] Code: 0
+[2026-04-13T07:14:41.330Z] --- SERVER STARTING ---
+[2026-04-13T07:14:41.352Z] Routers loaded successfully.
+[2026-04-13T07:14:41.386Z] 
+Server listening on port 5000
+[2026-04-13T07:14:41.387Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T04:56:57.561Z] --- SERVER STARTING ---
+[2026-04-14T04:56:57.576Z] Routers loaded successfully.
+[2026-04-14T04:56:57.602Z] 
+Server listening on port 5000
+[2026-04-14T04:56:57.603Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:18:26.474Z] Received SIGINT
+[2026-04-14T05:18:26.496Z] [ProcessExit] Code: 0
+[2026-04-14T05:18:28.496Z] --- SERVER STARTING ---
+[2026-04-14T05:18:28.507Z] Routers loaded successfully.
+[2026-04-14T05:18:28.527Z] 
+Server listening on port 5000
+[2026-04-14T05:18:28.528Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:20:34.393Z] Received SIGINT
+[2026-04-14T05:20:34.394Z] [ProcessExit] Code: 0
+[2026-04-14T05:20:35.793Z] --- SERVER STARTING ---
+[2026-04-14T05:20:35.800Z] Routers loaded successfully.
+[2026-04-14T05:20:35.815Z] 
+Server listening on port 5000
+[2026-04-14T05:20:35.816Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:26:16.706Z] Received SIGINT
+[2026-04-14T05:26:16.708Z] [ProcessExit] Code: 0
+[2026-04-14T05:26:19.746Z] --- SERVER STARTING ---
+[2026-04-14T05:26:19.755Z] Routers loaded successfully.
+[2026-04-14T05:26:19.773Z] 
+Server listening on port 5000
+[2026-04-14T05:26:19.774Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:28:41.165Z] Received SIGINT
+[2026-04-14T05:28:41.167Z] [ProcessExit] Code: 0
+[2026-04-14T05:28:42.833Z] --- SERVER STARTING ---
+[2026-04-14T05:28:42.840Z] Routers loaded successfully.
+[2026-04-14T05:28:42.856Z] 
+Server listening on port 5000
+[2026-04-14T05:28:42.857Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:29:57.433Z] Received SIGINT
+[2026-04-14T05:29:57.435Z] [ProcessExit] Code: 0
+[2026-04-14T05:29:58.953Z] --- SERVER STARTING ---
+[2026-04-14T05:29:58.961Z] Routers loaded successfully.
+[2026-04-14T05:29:58.978Z] 
+Server listening on port 5000
+[2026-04-14T05:29:58.979Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T05:46:33.630Z] Received SIGINT
+[2026-04-14T05:46:33.632Z] [ProcessExit] Code: 0
+[2026-04-14T05:46:35.548Z] --- SERVER STARTING ---
+[2026-04-14T05:46:35.560Z] Routers loaded successfully.
+[2026-04-14T05:46:35.578Z] 
+Server listening on port 5000
+[2026-04-14T05:46:35.579Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:14:37.563Z] --- SERVER STARTING ---
+[2026-04-14T15:14:37.569Z] Routers loaded successfully.
+[2026-04-14T15:14:37.582Z] 
+Server listening on port 5000
+[2026-04-14T15:14:37.583Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:21:06.064Z] Received SIGINT
+[2026-04-14T15:21:06.065Z] [ProcessExit] Code: 0
+[2026-04-14T15:21:07.949Z] --- SERVER STARTING ---
+[2026-04-14T15:21:07.954Z] Routers loaded successfully.
+[2026-04-14T15:21:07.968Z] 
+Server listening on port 5000
+[2026-04-14T15:21:07.969Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:24:06.175Z] Received SIGINT
+[2026-04-14T15:24:06.176Z] [ProcessExit] Code: 0
+[2026-04-14T15:24:07.505Z] --- SERVER STARTING ---
+[2026-04-14T15:24:07.510Z] Routers loaded successfully.
+[2026-04-14T15:24:07.527Z] 
+Server listening on port 5000
+[2026-04-14T15:24:07.527Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:34:07.898Z] Received SIGINT
+[2026-04-14T15:34:07.899Z] [ProcessExit] Code: 0
+[2026-04-14T15:34:09.503Z] --- SERVER STARTING ---
+[2026-04-14T15:34:09.510Z] Routers loaded successfully.
+[2026-04-14T15:34:09.528Z] 
+Server listening on port 5000
+[2026-04-14T15:34:09.528Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:39:10.846Z] Received SIGINT
+[2026-04-14T15:39:10.847Z] [ProcessExit] Code: 0
+[2026-04-14T15:39:12.796Z] --- SERVER STARTING ---
+[2026-04-14T15:39:12.804Z] Routers loaded successfully.
+[2026-04-14T15:39:12.820Z] 
+Server listening on port 5000
+[2026-04-14T15:39:12.821Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:45:32.276Z] --- SERVER STARTING ---
+[2026-04-14T15:45:32.282Z] Routers loaded successfully.
+[2026-04-14T15:45:32.294Z] 
+Server listening on port 5000
+[2026-04-14T15:45:32.294Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T15:45:32.295Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-04-14T15:45:32.295Z] [ProcessExit] Code: 0
+[2026-04-14T15:45:40.388Z] --- SERVER STARTING ---
+[2026-04-14T15:45:40.394Z] Routers loaded successfully.
+[2026-04-14T15:45:40.408Z] 
+Server listening on port 5000
+[2026-04-14T15:45:40.408Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:06:33.073Z] --- SERVER STARTING ---
+[2026-04-14T16:06:33.081Z] Routers loaded successfully.
+[2026-04-14T16:06:33.093Z] 
+Server listening on port 5000
+[2026-04-14T16:06:33.094Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:09:08.695Z] --- SERVER STARTING ---
+[2026-04-14T16:09:08.702Z] Routers loaded successfully.
+[2026-04-14T16:09:08.715Z] 
+Server listening on port 5000
+[2026-04-14T16:09:08.716Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:12:06.349Z] --- SERVER STARTING ---
+[2026-04-14T16:12:06.357Z] Routers loaded successfully.
+[2026-04-14T16:12:06.371Z] 
+Server listening on port 5000
+[2026-04-14T16:12:06.371Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:12:45.961Z] --- SERVER STARTING ---
+[2026-04-14T16:12:45.969Z] Routers loaded successfully.
+[2026-04-14T16:12:45.982Z] 
+Server listening on port 5000
+[2026-04-14T16:12:45.982Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:17:05.682Z] Received SIGINT
+[2026-04-14T16:17:05.683Z] [ProcessExit] Code: 0
+[2026-04-14T16:17:48.921Z] --- SERVER STARTING ---
+[2026-04-14T16:17:48.928Z] Routers loaded successfully.
+[2026-04-14T16:17:48.942Z] 
+Server listening on port 5000
+[2026-04-14T16:17:48.943Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:40:59.582Z] --- SERVER STARTING ---
+[2026-04-14T16:40:59.591Z] Routers loaded successfully.
+[2026-04-14T16:40:59.607Z] 
+Server listening on port 5000
+[2026-04-14T16:40:59.608Z] Health: http://localhost:5000/api/health
+
+[2026-04-14T16:55:28.041Z] Received SIGINT
+[2026-04-14T16:55:28.042Z] [ProcessExit] Code: 0
+[2026-04-16T06:34:41.849Z] --- SERVER STARTING ---
+[2026-04-16T06:34:41.862Z] Routers loaded successfully.
+[2026-04-16T06:34:41.885Z] 
+Server listening on port 5000
+[2026-04-16T06:34:41.886Z] Health: http://localhost:5000/api/health
+
+[2026-04-16T06:45:42.218Z] --- SERVER STARTING ---
+[2026-04-16T06:45:42.227Z] Routers loaded successfully.
+[2026-04-16T06:45:42.241Z] 
+Server listening on port 5000
+[2026-04-16T06:45:42.243Z] Health: http://localhost:5000/api/health
+
+[2026-04-16T06:49:20.866Z] --- SERVER STARTING ---
+[2026-04-16T06:49:20.882Z] Routers loaded successfully.
+[2026-04-16T06:49:20.905Z] 
+Server listening on port 5000
+[2026-04-16T06:49:20.906Z] Health: http://localhost:5000/api/health
+
+[2026-04-16T06:49:20.908Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-04-16T06:49:20.909Z] [ProcessExit] Code: 0
+[2026-04-16T06:50:12.207Z] Received SIGINT
+[2026-04-16T06:50:12.208Z] [ProcessExit] Code: 0
+[2026-04-16T06:50:13.838Z] --- SERVER STARTING ---
+[2026-04-16T06:50:13.854Z] Routers loaded successfully.
+[2026-04-16T06:50:13.875Z] 
+Server listening on port 5000
+[2026-04-16T06:50:13.875Z] Health: http://localhost:5000/api/health
+
+[2026-04-16T07:04:45.636Z] Received SIGINT
+[2026-04-16T07:04:45.646Z] [ProcessExit] Code: 0
+[2026-04-20T06:40:54.974Z] --- SERVER STARTING ---
+[2026-04-20T06:40:55.033Z] Routers loaded successfully.
+[2026-04-20T06:40:55.120Z] 
+Server listening on port 5000
+[2026-04-20T06:40:55.122Z] Health: http://localhost:5000/api/health
+
+[2026-04-21T05:47:26.215Z] --- SERVER STARTING ---
+[2026-04-21T05:47:26.228Z] Routers loaded successfully.
+[2026-04-21T05:47:26.248Z] 
+Server listening on port 5000
+[2026-04-21T05:47:26.248Z] Health: http://localhost:5000/api/health
+
+[2026-04-21T05:56:08.695Z] Received SIGINT
+[2026-04-21T05:56:08.697Z] [ProcessExit] Code: 0
+[2026-04-21T05:56:10.122Z] --- SERVER STARTING ---
+[2026-04-21T05:56:10.134Z] Routers loaded successfully.
+[2026-04-21T05:56:10.156Z] 
+Server listening on port 5000
+[2026-04-21T05:56:10.157Z] Health: http://localhost:5000/api/health
+
+[2026-04-21T06:02:28.997Z] Received SIGINT
+[2026-04-21T06:02:28.998Z] [ProcessExit] Code: 0
+[2026-04-21T06:02:30.514Z] --- SERVER STARTING ---
+[2026-04-21T06:02:30.525Z] Routers loaded successfully.
+[2026-04-21T06:02:30.541Z] 
+Server listening on port 5000
+[2026-04-21T06:02:30.542Z] Health: http://localhost:5000/api/health
+
+[2026-04-21T06:07:15.696Z] Received SIGINT
+[2026-04-21T06:07:15.698Z] [ProcessExit] Code: 0
+[2026-04-22T10:35:06.613Z] --- SERVER STARTING ---
+[2026-04-22T10:35:06.628Z] Routers loaded successfully.
+[2026-04-22T10:35:06.653Z] 
+Server listening on port 5000
+[2026-04-22T10:35:06.654Z] Health: http://localhost:5000/api/health
+
+[2026-04-22T10:37:11.933Z] Received SIGINT
+[2026-04-22T10:37:11.934Z] [ProcessExit] Code: 0
