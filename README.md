@@ -7,13 +7,13 @@
 
 **🔴 Live Demo:** [https://aielectionforecastingbot-1.onrender.com](https://aielectionforecastingbot-1.onrender.com)
 
-**Cypher Guard** is a highly advanced, full-stack interactive election forecasting tool. It deploys a sophisticated "Neural Swarm" of AI agents to analyze live web data, historical trends, regional sentiment, and demographic shifts, providing real-time predictive modeling for any global political election.
+**ElectIQ** is a highly advanced, full-stack interactive election forecasting tool. It deploys a sophisticated "Neural Swarm" of AI agents to analyze live web data, historical trends, regional sentiment, and demographic shifts, providing real-time predictive modeling for any global political election.
 
 ---
 
 ## 🏗️ 1. System Architecture & High-Level Flow
 
-Cypher Guard operates on a decoupled client-server architecture designed for speed, security, and real-time feedback.
+ElectIQ operates on a decoupled client-server architecture designed for speed, security, and real-time feedback.
 
 1. **User Input:** The user submits a natural language query (e.g., *"2024 US Presidential Election"*).
 2. **Input Validation:** The Node.js backend intercepts the request and runs a strict Regex-based validation to ensure the query is explicitly related to politics/elections, preventing abuse of the AI API.
@@ -128,7 +128,7 @@ This application is fully containerized and configured for zero-downtime deploym
 
 ## 💻 6. Local Development Setup
 
-To run, modify, or contribute to Cypher Guard locally:
+To run, modify, or contribute to ElectIQ locally:
 
 1. **Clone the repository:**
    ```bash
@@ -156,4 +156,4 @@ To run, modify, or contribute to Cypher Guard locally:
    *The application will be available at `http://localhost:5173`. Any changes to the React code will hot-reload automatically.*
 
 ---
-*Disclaimer: Cypher Guard provides predictive modeling based on publicly available data, LLM web scraping, and AI inference. It does not guarantee actual election results and should be used for analytical and entertainment purposes.*
+*Disclaimer: ElectIQ provides predictive modeling based on publicly available data, LLM web scraping, and AI inference. It does not guarantee actual election results and should be used for analytical and entertainment purposes.*
