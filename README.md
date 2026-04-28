@@ -1,4 +1,4 @@
-# 🔮 Cypher Guard: AI Election Forecasting Bot
+# 🔮 ElectIQ : AI Election Forecasting Bot
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB.svg)
