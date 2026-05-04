@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
         res.setHeader('Connection', 'keep-alive');
 
         // Check if cache is still valid
-        if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
+        if (!req.body.nocache && cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
             console.log(`=== CACHE HIT (60m): ${query} ===`);
             res.write(`data: ${JSON.stringify({ text: JSON.stringify({ ...cached.data, cached: true }) })}\n\n`);
             res.write('data: [DONE]\n\n');
@@ -180,9 +180,12 @@ You are NOT allowed to contradict the live data.
 You are NOT allowed to add anything not in the data.
 No exceptions. No opinions. Format only.
 
-You MUST return candidates array with minimum 2 candidates. This field is mandatory always.
+You MUST return candidates array.
+If the election is West Bengal 2026, you MUST return exactly 3 candidates (TMC, BJP, and Left Front/INC alliance).
+Otherwise, you MUST return minimum 2 candidates.
+This field is mandatory always.
 For each candidate include these exact fields: name, party, win_probability, projected_vote_share, momentum, status.
-win_probability values must sum to 100.
+win_probability values must sum to 100. For West Bengal, ensure the Left Front/INC alliance is given a probability and vote share.
 momentum must be rising stable or falling.
 Never return empty candidates array ever.
 
