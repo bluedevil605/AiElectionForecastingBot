@@ -44,7 +44,10 @@ router.post('/', async (req, res) => {
         res.setHeader('Connection', 'keep-alive');
 
         // Check if cache is still valid
-        if (!req.body.nocache && cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
+        if (req.body.nocache) {
+            console.log(`=== CACHE BYPASS: ${query} ===`);
+            forecastCache.delete(cacheKey);
+        } else if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
             console.log(`=== CACHE HIT (60m): ${query} ===`);
             res.write(`data: ${JSON.stringify({ text: JSON.stringify({ ...cached.data, cached: true }) })}\n\n`);
             res.write('data: [DONE]\n\n');
