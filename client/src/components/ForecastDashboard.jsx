@@ -101,7 +101,7 @@ export default function ForecastDashboard() {
     if (forecastData.election_status === 'completed') return activeCandidates;
 
     return activeCandidates.map(c => {
-      const rawProb = c.winProbability ?? c.win_probability;
+      const rawProb = c.win_probability ?? c.winProbability;
       const base = (rawProb !== null && rawProb !== undefined && !isNaN(parseFloat(rawProb)))
         ? parseFloat(rawProb) : null;
       return { ...c, winProbability: base };
@@ -157,7 +157,7 @@ export default function ForecastDashboard() {
           </div>
           <p className="text-slate-500 text-sm font-bold uppercase tracking-widest flex items-center gap-3">
             <Cpu size={14} className="text-indigo-500" />
-            Analysis Ver. 4.2.0 • Pulse Check: {new Date(forecastData.lastUpdated).toLocaleTimeString()}
+            Analysis Ver. 4.2.0 • Pulse Check: {forecastData.lastUpdated ? new Date(forecastData.lastUpdated).toLocaleTimeString() : 'REAL-TIME'}
           </p>
         </div>
       </header>

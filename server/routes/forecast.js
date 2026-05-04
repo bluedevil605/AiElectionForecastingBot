@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         if (!query) return res.status(400).json({ error: 'Election query required.' });
 
         // Input validation to prevent non-election queries from hitting the AI
-        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|democrat|republican|referendum|ballot|primary|midterm|politics|parliament|minister|tory|labour|biden|trump|harris|modi|bjp|win|lose|party|leader|seat|federal|assembly|municipal|council|state|uk|us|india|germany|france|mexico|bihar|national/i;
+        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|democrat|republican|referendum|ballot|primary|midterm|politics|parliament|minister|tory|labour|biden|trump|harris|modi|bjp|win|lose|party|leader|seat|federal|assembly|municipal|council|state|uk|us|india|germany|france|mexico|bihar|bengal|up|maharashtra|haryana|tamil|kerala|karnataka|punjab|gujarat|assam|national|voters|vidhan|sabha/i;
         if (!electionRegex.test(query)) {
             return res.status(400).json({ error: 'Invalid Input: Please enter an election-related query.' });
         }
@@ -152,24 +152,45 @@ Your ONLY job is to format that data into JSON.
 You are NOT allowed to use your own knowledge.
 You are NOT allowed to contradict the live data.
 You are NOT allowed to add anything not in the data.
-If live data says BJP won you must output BJP won.
 No exceptions. No opinions. Format only.
 
-If this election has NOT happened yet:
-- Set election_status to upcoming
+If this election has NOT happened yet (UPCOMING/ONGOING):
+- Set election_status to upcoming or ongoing
 - Do NOT set a winner
-- DO provide winProbability for each candidate
-- DO provide projectedVoteShare for each candidate
-- DO provide pollingAverage if available
-- DO provide momentum for each candidate
-- DO provide forecastSummary explaining who is likely to win and why
-- DO provide swingFactors that will decide result
-- DO provide confidenceLevel of the forecast
-- Base forecast on latest available polling data
-- Base forecast on historical voting patterns
-- Base forecast on incumbency advantage
-- Base forecast on current political climate
-Use your training knowledge for upcoming elections since no official result exists yet.`;
+- DO provide win_probability for each candidate (number 0-100)
+- DO provide projected_vote_share for each candidate (number)
+- DO provide momentum for each candidate (rising, stable, falling)
+- DO provide polling_average if available (number)
+- DO provide election_date as proper date string
+- DO provide forecast_summary explaining who is likely to win and why
+- DO provide swing_factors that will decide result
+- DO provide confidenceLevel of the forecast (low, medium, high)
+- Use your training knowledge for upcoming elections since no official result exists yet.
+
+If this election is COMPLETED:
+- Set election_status to completed
+- Set actual_result with winner_name, winning_party, seat_count (object with won vs total, e.g. {"won": 202, "total": 243}), vote_share, and margin.
+- If vote_share or margin are not explicitly in context, estimate them based on the victory scale (e.g., landslide = high vote share/margin).
+- YOU MUST provide the 'candidates' array even for completed elections. Populate it with the main contenders/parties mentioned in the data.
+- For each candidate in 'candidates', set 'projected_vote_share' to their final vote share.
+- If seat_count is for an Indian state, ensure accuracy (e.g., Bihar is 243, West Bengal is 294, UP is 403, USA is 538).
+
+Example of correct COMPLETED response:
+{
+  "election_status": "completed",
+  "actual_result": {
+    "winner_name": "Winner Name",
+    "winning_party": "Party A",
+    "seat_count": { "won": 200, "total": 400 },
+    "vote_share": 48.5,
+    "margin": 12.0
+  },
+  "candidates": [
+    { "name": "Winner Name", "party": "Party A", "projected_vote_share": 48.5, "status": "active" },
+    { "name": "Loser Name", "party": "Party B", "projected_vote_share": 36.5, "status": "active" }
+  ],
+  "forecast_summary": "Party A won a landslide victory with 200 seats."
+}`;
 
             const userPrompt = `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:
 ${extractedText}
@@ -179,47 +200,41 @@ Today's date is ${today}.
 Format the above data into this JSON structure:
 {
   "election_status": "upcoming" | "ongoing" | "completed",
-  "election_date": "date string or approximate",
-  "actual_result": "object with winner_name, winning_party, seat_count if completed, else null",
+  "election_date": "YYYY-MM-DD or readable string",
+  "actual_result": {
+    "winner_name": "string",
+    "winning_party": "string",
+    "seat_count": { "won": number, "total": number },
+    "vote_share": number,
+    "margin": number
+  } | null,
   "candidates": [
     {
       "name": "string",
       "party": "string",
       "party_logo_url": "Wikipedia Commons SVG URL",
-      "party_color": "hex or named color",
+      "party_color": "hex",
       "party_abbreviation": "string",
-      "winProbability": number 0 to 100,
-      "projectedVoteShare": number,
+      "win_probability": number,
+      "projected_vote_share": number,
       "momentum": "rising" | "stable" | "falling",
       "status": "active"
     }
   ],
-  "forecast_summary": "2-3 sentence prediction for upcoming, or summary for completed",
+  "forecast_summary": "Summary string",
   "confidenceLevel": "low" | "medium" | "high",
   "swing_factors": [
     { "factor": "string", "impact": number 1-10 }
   ],
-  "polling_average": number or null,
-  "historical_context": "previous election result",
-  "key_issues": ["issue1", "issue2", "issue3"],
-  "disruption_risks": ["risk1", "risk2"]
-}
-
-Example of correct upcoming election response:
-For a state election where Party A leads polls:
-{
-  "election_status": "upcoming",
-  "candidates": [
-    { "name": "Leader A", "party": "Party A", "winProbability": 65, "momentum": "rising", "status": "active" },
-    { "name": "Leader B", "party": "Party B", "winProbability": 35, "momentum": "falling", "status": "active" }
-  ],
-  "forecast_summary": "Party A is favored to win based on recent polls showing 40 percent support versus Party B at 32 percent. Incumbency and development agenda are key factors.",
-  "confidenceLevel": "medium"
+  "polling_average": number | null,
+  "historical_context": "string",
+  "key_issues": ["string"],
+  "disruption_risks": ["string"]
 }
 
 CRITICAL: 
-1. For COMPLETED elections: ONLY use data from the verified context above. Do NOT use your own knowledge.
-2. For UPCOMING elections: Use the verified context as the primary source, but you MUST use your own training knowledge to fill in candidates, win probabilities, polling trends, and analysis if the live data is sparse. Provide a realistic, data-driven forecast.
+1. For COMPLETED: Use ONLY context above. DO NOT leave 'candidates' null. Ensure seat_count has both 'won' and 'total'.
+2. For UPCOMING/ONGOING: Provide forecast with win_probability, projected_vote_share, momentum, polling_average, and election_date.
 3. Output ONLY valid JSON. No conversational text.`;
 
             const messages = [
@@ -237,7 +252,7 @@ CRITICAL:
         
         let finalForecast;
         try {
-            console.log("RAW RESPONSE FROM MODEL:", rawResponse);
+            console.log("RAW GROQ RESPONSE:", JSON.stringify(rawResponse));
             finalForecast = JSON.parse(rawResponse);
             
             // Step 3: Backend Validation for Upcoming/Completed
@@ -245,13 +260,14 @@ CRITICAL:
                 if (!finalForecast.actual_result || !finalForecast.actual_result.winner_name) {
                     throw new Error("Completed election missing winner data.");
                 }
-            } else if (finalForecast.election_status === 'upcoming') {
+            } else if (finalForecast.election_status === 'upcoming' || finalForecast.election_status === 'ongoing') {
                 // Ensure win probabilities add up to ~100
-                const totalProb = finalForecast.candidates?.reduce((sum, c) => sum + (c.winProbability || 0), 0);
+                const totalProb = finalForecast.candidates?.reduce((sum, c) => sum + (c.win_probability || c.winProbability || 0), 0);
                 if (totalProb > 0 && (totalProb < 80 || totalProb > 120)) {
                     console.warn(`[Validation] Win probabilities sum to ${totalProb}, normalizing...`);
                     finalForecast.candidates.forEach(c => {
-                        c.winProbability = (c.winProbability / totalProb) * 100;
+                        const prob = c.win_probability || c.winProbability || 0;
+                        c.win_probability = (prob / totalProb) * 100;
                     });
                 }
             }
