@@ -85,6 +85,28 @@ router.post('/', async (req, res) => {
 
         // Context Block Creation
         let liveContextBlock = "";
+        let specificContext = "";
+
+        // Inject known context for major elections (Step 3 & 7)
+        const qLower = query.toLowerCase();
+        if (qLower.includes("bihar")) {
+            specificContext = `
+KNOWN ELECTION CONTEXT:
+Bihar has 243 seats, majority is 122.
+NDA: Nitish Kumar (JDU+BJP)
+INDIA: Tejashwi Yadav (RJD+INC)
+Nitish Kumar is current Chief Minister.
+2020 result: NDA won 125 seats.`;
+        } else if (qLower.includes("bengal")) {
+            specificContext = `
+KNOWN ELECTION CONTEXT:
+West Bengal has 294 seats, majority is 148.
+TMC: Mamata Banerjee (incumbent)
+BJP: main challenger
+2021 result: TMC won 213 seats.
+Election dates: April 23, 29 and May 21 2026.`;
+        }
+
         if (
             wikiContext.includes("failed") && wikiContext.includes("error") && 
             gnewsContext.includes("failed") && gnewsContext.includes("error") &&
@@ -96,6 +118,7 @@ No live data could be fetched for this election.
 Only return data you are highly confident about.
 Return null for any uncertain fields.
 Do not guess or hallucinate any results.
+${specificContext}
 `;
         } else {
             liveContextBlock = `
@@ -109,6 +132,8 @@ ${gnewsContext}
 
 Google Search Results:
 ${serperContext}
+
+${specificContext}
 
 Today's date is ${today}.
 Base your entire response on this live data only.
@@ -154,6 +179,14 @@ You are NOT allowed to contradict the live data.
 You are NOT allowed to add anything not in the data.
 No exceptions. No opinions. Format only.
 
+You MUST return candidates array with minimum 2 candidates. This field is mandatory always.
+For each candidate include these exact fields: name, party, win_probability, projected_vote_share, momentum, status.
+win_probability values must sum to 100.
+momentum must be rising stable or falling.
+Never return empty candidates array ever.
+
+You MUST always return minimum 2 items in disruption_risks array. Never empty.
+
 If this election has NOT happened yet (UPCOMING/ONGOING):
 - Set election_status to upcoming or ongoing
 - Do NOT set a winner
@@ -186,8 +219,8 @@ Example of correct COMPLETED response:
     "margin": 12.0
   },
   "candidates": [
-    { "name": "Winner Name", "party": "Party A", "projected_vote_share": 48.5, "status": "active" },
-    { "name": "Loser Name", "party": "Party B", "projected_vote_share": 36.5, "status": "active" }
+    { "name": "Winner Name", "party": "Party A", "projected_vote_share": 48.5, "status": "active", "win_probability": 100, "momentum": "stable" },
+    { "name": "Loser Name", "party": "Party B", "projected_vote_share": 36.5, "status": "active", "win_probability": 0, "momentum": "stable" }
   ],
   "forecast_summary": "Party A won a landslide victory with 200 seats."
 }`;
@@ -254,6 +287,8 @@ CRITICAL:
         try {
             console.log("RAW GROQ RESPONSE:", JSON.stringify(rawResponse));
             finalForecast = JSON.parse(rawResponse);
+            console.log("GROQ RAW:", JSON.stringify(finalForecast));
+            console.log("CANDIDATES:", finalForecast.candidates);
             
             // Step 3: Backend Validation for Upcoming/Completed
             if (finalForecast.election_status === 'completed') {

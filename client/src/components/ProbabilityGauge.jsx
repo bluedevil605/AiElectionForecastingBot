@@ -3,7 +3,15 @@ import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import PartyLogo from './PartyLogo';
 
 export default function ProbabilityGauge({ candidates, margin }) {
-  if (!candidates || candidates.length === 0) return null;
+  console.log("Candidates received:", candidates);
+
+  if (!candidates || candidates.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full text-slate-400 font-bold uppercase tracking-widest italic py-20">
+        Fetching candidate data...
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -27,6 +35,8 @@ export default function ProbabilityGauge({ candidates, margin }) {
           const rawVote = c.projectedVoteShare ?? c.projected_vote_share;
           const voteShare = (rawVote !== null && rawVote !== undefined && !isNaN(parseFloat(rawVote)))
             ? parseFloat(rawVote) : null;
+            
+          const momentum = c.momentum || 'stable'; // default to stable
 
           return (
             <motion.div 
@@ -56,11 +66,11 @@ export default function ProbabilityGauge({ candidates, margin }) {
                           {width.toFixed(1)}<span className="text-sm text-slate-500 ml-0.5">%</span>
                         </span>
                         <div className="flex items-center gap-1 mt-1">
-                          {c.momentum === 'rising' ? (
+                          {momentum === 'rising' ? (
                             <div className="flex items-center gap-1 text-emerald-400 text-sm font-black uppercase tracking-widest">
                               <TrendingUp size={12} /> Gaining
                             </div>
-                          ) : c.momentum === 'falling' ? (
+                          ) : momentum === 'falling' ? (
                             <div className="flex items-center gap-1 text-rose-400 text-sm font-black uppercase tracking-widest">
                               <TrendingDown size={12} /> Receding
                             </div>

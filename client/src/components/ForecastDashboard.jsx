@@ -229,7 +229,13 @@ export default function ForecastDashboard() {
         <motion.div variants={itemVariants} className="glass-panel p-6 rounded-3xl border border-white/5">
            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Polling Average</p>
            <div className="flex items-end gap-2">
-              <span className="text-3xl font-black text-white">{forecastData.polling_average || '--'}%</span>
+              <span className="text-3xl font-black text-white">
+                {forecastData.polling_average !== null ? forecastData.polling_average : (
+                   adjustedCandidates.length > 0 && adjustedCandidates[0].projected_vote_share 
+                      ? adjustedCandidates[0].projected_vote_share 
+                      : '--'
+                )}%
+              </span>
               <span className="text-xs font-bold text-emerald-400 mb-1">AGGREGATE</span>
            </div>
         </motion.div>

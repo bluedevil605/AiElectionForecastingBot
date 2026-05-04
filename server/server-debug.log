@@ -658,3 +658,51 @@ Server listening on port 5000
 Server listening on port 5000
 [2026-05-04T23:25:41.999Z] Health: http://localhost:5000/api/health
 
+[2026-05-04T23:32:19.070Z] --- SERVER STARTING ---
+[2026-05-04T23:32:19.079Z] Routers loaded successfully.
+[2026-05-04T23:32:19.092Z] 
+Server listening on port 5000
+[2026-05-04T23:32:19.093Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:33:06.495Z] --- SERVER STARTING ---
+[2026-05-04T23:33:06.506Z] Routers loaded successfully.
+[2026-05-04T23:33:06.521Z] 
+Server listening on port 5000
+[2026-05-04T23:33:06.522Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:35:02.331Z] --- SERVER STARTING ---
+[2026-05-04T23:35:02.340Z] Routers loaded successfully.
+[2026-05-04T23:35:02.354Z] 
+Server listening on port 5000
+[2026-05-04T23:35:02.355Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:35:54.031Z] --- SERVER STARTING ---
+[2026-05-04T23:35:54.039Z] Routers loaded successfully.
+[2026-05-04T23:35:54.052Z] 
+Server listening on port 5000
+[2026-05-04T23:35:54.052Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:37:13.724Z] --- SERVER STARTING ---
+[2026-05-04T23:37:13.732Z] Routers loaded successfully.
+[2026-05-04T23:37:13.746Z] 
+Server listening on port 5000
+[2026-05-04T23:37:13.746Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:47:58.395Z] --- SERVER STARTING ---
+[2026-05-04T23:47:58.406Z] Routers loaded successfully.
+[2026-05-04T23:47:58.419Z] 
+Server listening on port 5000
+[2026-05-04T23:47:58.420Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:47:58.421Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-05-04T23:47:58.421Z] [ProcessExit] Code: 0
+[2026-05-04T23:48:16.896Z] --- SERVER STARTING ---
+[2026-05-04T23:48:16.906Z] Routers loaded successfully.
+[2026-05-04T23:48:16.922Z] 
+Server listening on port 5000
+[2026-05-04T23:48:16.922Z] Health: http://localhost:5000/api/health
+
