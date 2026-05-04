@@ -22,7 +22,7 @@ async function callGroq(prompt, res = null) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "groq/compound", // Use newer, more stable versatile model.
+      model: "llama-3.3-70b-versatile", // Reverted from groq/compound due to 413s and invalid JSON formatting
       messages: [{ role: "user", content: prompt }],
       temperature: 0.1,
       response_format: { type: "json_object" },

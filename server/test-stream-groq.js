@@ -1,0 +1,1 @@
+const { callGroq } = require('./utils/groqClient'); callGroq('You are a political data analyst. Return ONLY valid JSON. Target Election: Bengal elections 2026. Give me the current month and year according to your web search right now. JSON SCHEMA: {"current_date": "str", "latest_news": "str"}').then(console.log).catch(console.error);

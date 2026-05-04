@@ -586,3 +586,27 @@ Server listening on port 5000
 
 [2026-04-22T10:37:11.933Z] Received SIGINT
 [2026-04-22T10:37:11.934Z] [ProcessExit] Code: 0
+[2026-05-04T16:35:21.203Z] --- SERVER STARTING ---
+[2026-05-04T16:35:21.212Z] Routers loaded successfully.
+[2026-05-04T16:35:21.225Z] 
+Server listening on port 5000
+[2026-05-04T16:35:21.226Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T22:52:23.881Z] --- SERVER STARTING ---
+[2026-05-04T22:52:23.891Z] Routers loaded successfully.
+[2026-05-04T22:52:23.905Z] 
+Server listening on port 5000
+[2026-05-04T22:52:23.905Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T22:53:28.770Z] --- SERVER STARTING ---
+[2026-05-04T22:53:28.786Z] Routers loaded successfully.
+[2026-05-04T22:53:28.807Z] 
+Server listening on port 5000
+[2026-05-04T22:53:28.808Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T22:56:50.677Z] --- SERVER STARTING ---
+[2026-05-04T22:56:50.688Z] Routers loaded successfully.
+[2026-05-04T22:56:50.703Z] 
+Server listening on port 5000
+[2026-05-04T22:56:50.704Z] Health: http://localhost:5000/api/health
+
