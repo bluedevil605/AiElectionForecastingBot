@@ -706,3 +706,21 @@ Server listening on port 5000
 Server listening on port 5000
 [2026-05-04T23:48:16.922Z] Health: http://localhost:5000/api/health
 
+[2026-05-04T23:56:41.743Z] --- SERVER STARTING ---
+[2026-05-04T23:56:41.751Z] Routers loaded successfully.
+[2026-05-04T23:56:41.764Z] 
+Server listening on port 5000
+[2026-05-04T23:56:41.764Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:56:41.765Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-05-04T23:56:41.765Z] [ProcessExit] Code: 0
+[2026-05-04T23:57:25.705Z] --- SERVER STARTING ---
+[2026-05-04T23:57:25.712Z] Routers loaded successfully.
+[2026-05-04T23:57:25.725Z] 
+Server listening on port 5000
+[2026-05-04T23:57:25.725Z] Health: http://localhost:5000/api/health
+

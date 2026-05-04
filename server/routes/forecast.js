@@ -184,11 +184,14 @@ You are NOT allowed to add anything not in the data.
 No exceptions. No opinions. Format only.
 
 You MUST return candidates array.
-If the election is West Bengal 2026, you MUST return exactly 3 candidates (TMC, BJP, and Left Front/INC alliance).
-Otherwise, you MUST return minimum 2 candidates.
+If the query mentions "West Bengal", you MUST return EXACTLY 3 candidates:
+1. TMC (Mamata Banerjee)
+2. BJP (Suvendu Adhikari or generic BJP Candidate)
+3. Left Front / INC
 This field is mandatory always.
 For each candidate include these exact fields: name, party, win_probability, projected_vote_share, momentum, status.
-win_probability values must sum to 100. For West Bengal, ensure the Left Front/INC alliance is given a probability and vote share.
+win_probability values must sum to 100 across all returned candidates.
+For West Bengal, you MUST ensure all 3 candidates (TMC, BJP, and Left Front / INC) are given a probability and vote share.
 momentum must be rising stable or falling.
 Never return empty candidates array ever.
 
