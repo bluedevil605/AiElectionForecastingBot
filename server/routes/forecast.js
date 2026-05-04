@@ -104,16 +104,16 @@ REQUIRED JSON SCHEMA:
         isRequestInProgress = true;
         
         let rawResponse;
-        let finalModel = 'gemini';
+        let finalModel = 'groq';
 
         try {
-            console.log(`\n=== MASTER AGENT STARTING (GEMINI API PRIMARY STREAMING): ${query} ===`);
-            rawResponse = await callGemini(consolidatedPrompt, res);
-        } catch (geminiErr) {
-            console.warn(`[Forecast Route] Gemini primary failed (${geminiErr.message}). Falling back to Groq...`);
-            console.log(`\n=== MASTER AGENT FALLBACK (GROQ STREAMING SECONDARY): ${query} ===`);
-            finalModel = 'groq';
+            console.log(`\n=== MASTER AGENT STARTING (GROQ API PRIMARY STREAMING): ${query} ===`);
             rawResponse = await callGroq(consolidatedPrompt, res);
+        } catch (groqErr) {
+            console.warn(`[Forecast Route] Groq primary failed (${groqErr.message}). Falling back to Gemini...`);
+            console.log(`\n=== MASTER AGENT FALLBACK (GEMINI STREAMING SECONDARY): ${query} ===`);
+            finalModel = 'gemini';
+            rawResponse = await callGemini(consolidatedPrompt, res);
         }
         
         let finalForecast;
