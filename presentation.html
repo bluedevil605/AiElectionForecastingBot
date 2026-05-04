@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>ElectIQ: AI Election Forecasting</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/dracula.min.css">
+        <style>
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+                text-transform: none;
+                font-weight: bold;
+                background: linear-gradient(90deg, #00f2fe, #4facfe);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .reveal .slide-background {
+                background-color: #0b0f19;
+            }
+            .highlight {
+                color: #00f2fe;
+            }
+            ul li {
+                margin-bottom: 15px;
+            }
+            .box {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 20px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+            }
+            .flex-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                gap: 20px;
+            }
+            .tech-badge {
+                background: rgba(0, 242, 254, 0.2);
+                border: 1px solid #00f2fe;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.6em;
+                margin: 5px;
+                display: inline-block;
+            }
+            code {
+                color: #ff79c6;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+                <!-- Slide 1: Title -->
+                <section>
+					<h1>🔮 ElectIQ</h1>
+					<h3>AI Election Forecasting Bot</h3>
+					<p style="margin-top: 50px;">
+						<small>Real-time predictive modeling for global political elections</small>
+					</p>
+				</section>
+
+                <!-- Slide 2: The Problem -->
+                <section>
+                    <h2>The Challenge</h2>
+                    <p>Modern elections are driven by overwhelming amounts of data:</p>
+                    <div class="box fragment" style="text-align: left; font-size: 0.8em;">
+                        <ul>
+                            <li><strong>Information Overload:</strong> News cycles update by the minute.</li>
+                            <li><strong>Stale Polling:</strong> Traditional polls lag behind fast-moving digital sentiment.</li>
+                            <li><strong>Complex Demographics:</strong> Shifting voter bases require deep, multi-variable analysis.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Slide 3: The Solution -->
+				<section>
+					<h2>The Solution: ElectIQ</h2>
+					<p>ElectIQ deploys a sophisticated <strong>Neural Swarm</strong> of AI agents.</p>
+                    <div class="box fragment" style="text-align: left; font-size: 0.8em;">
+                        <ul>
+                            <li>Analyzes live web data and historical trends instantly.</li>
+                            <li>Evaluates regional sentiment and demographic shifts.</li>
+                            <li>Provides real-time predictive modeling with quantitative probability scores.</li>
+                        </ul>
+                    </div>
+				</section>
+
+                <!-- Slide 4: System Architecture -->
+				<section>
+                    <h2>System Architecture</h2>
+                    <p style="font-size: 0.8em;">Decoupled client-server architecture built for speed and security.</p>
+                    <div class="flex-container fragment" style="margin-top: 40px; font-size: 0.7em;">
+                        <div class="box" style="flex:1;">👤 User Query</div>
+                        <div>&rarr;</div>
+                        <div class="box" style="flex:1;">🛡️ Validation & Cache</div>
+                        <div>&rarr;</div>
+                        <div class="box" style="flex:1;">🧠 AI Pipeline</div>
+                        <div>&rarr;</div>
+                        <div class="box" style="flex:1;">📊 UI Rendering</div>
+                    </div>
+				</section>
+
+                <!-- Slide 5: Streaming Telemetry -->
+                <section>
+                    <h2>The Telemetry Stream</h2>
+                    <div class="box" style="text-align: left; font-size: 0.8em;">
+                        <p>Instead of making users wait 15+ seconds for a massive JSON payload...</p>
+                        <p class="fragment">The server pipes the AI's internal "thought process" back to the client chunk-by-chunk using <strong>Server-Sent Events (SSE)</strong>.</p>
+                        <p class="fragment" style="color: #00f2fe;"><em>Result: A "hacker-style" live telemetry terminal that engages users instantly.</em></p>
+                    </div>
+                </section>
+
+                <!-- Slide 6: The AI Engine (Primary) -->
+				<section>
+					<h2>🧠 Primary AI Engine</h2>
+                    <div class="box" style="text-align: left; font-size: 0.8em;">
+                        <h4>Groq API (llama-3.3-70b-versatile)</h4>
+                        <ul>
+                            <li>Powered by Groq's LPU™ Inference Engine for blazing-fast token generation.</li>
+                            <li>Handles complex reasoning and historical comparisons.</li>
+                            <li>Streams insights directly to the user interface with near-zero latency.</li>
+                        </ul>
+                    </div>
+				</section>
+
+                <!-- Slide 7: The AI Engine (Fallback) -->
+                <section>
+                    <h2>🛡️ Fallback AI Engine</h2>
+                    <div class="box" style="text-align: left; font-size: 0.8em;">
+                        <h4>Google Gemini (gemini-2.5-flash)</h4>
+                        <ul>
+                            <li>Seamlessly takes over if the primary engine hits rate limits.</li>
+                            <li>Utilizes <strong>Google Search Grounding</strong>.</li>
+                            <li>Injects real-time web data and breaking news directly into the forecast.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Slide 8: Data Structure -->
+                <section>
+                    <h2>Enforcing JSON Schemas</h2>
+                    <p style="font-size: 0.8em;">The AI is strictly prompted to return perfectly structured data, binding backend to frontend.</p>
+                    <pre class="fragment"><code class="json" data-trim data-noescape style="font-size: 0.6em; line-height: 1.2em;">
+{
+  "election_status": "upcoming",
+  "candidates": [
+    { 
+      "name": "Candidate A", 
+      "party": "Party Name", 
+      "winProbability": 65.5, 
+      "momentum": "rising", 
+      "sentimentScore": 75 
+    }
+  ],
+  "marginOfVictoryEstimate": "1.2%",
+  "confidenceLevel": "high"
+}
+                    </code></pre>
+                </section>
+
+                <!-- Slide 9: Frontend Tech -->
+				<section>
+					<h2>💻 The Frontend Stack</h2>
+					<p style="font-size: 0.8em;">Built for maximum visual impact, smooth micro-interactions, and premium aesthetics.</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <span class="tech-badge">React 18</span>
+                        <span class="tech-badge">Vite</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Zustand</span>
+                        <span class="tech-badge">Framer Motion</span>
+                        <span class="tech-badge">Recharts</span>
+                    </div>
+
+                    <p class="fragment" style="margin-top: 30px; font-size: 0.8em;">Features complex gradients, drop shadows, dark mode, and "glassmorphism" components.</p>
+				</section>
+
+                <!-- Slide 10: Dynamic Components -->
+                <section>
+                    <h2>Interactive UI Components</h2>
+                    <div class="box" style="text-align: left; font-size: 0.7em;">
+                        <ul>
+                            <li><strong>PartyLogo:</strong> Dynamically queries the Wikipedia API to fetch and render high-resolution SVG political party logos.</li>
+                            <li><strong>ProbabilityGauge:</strong> Custom SVG visualizations using Recharts displaying win probability as glowing circular gauges.</li>
+                            <li><strong>SentimentMeter:</strong> Visual bars indicating positive/negative public sentiment based on AI scraping.</li>
+                            <li><strong>AIExplanation:</strong> Renders qualitative data including decisive factors and risk vectors.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Slide 11: Backend Security -->
+				<section>
+					<h2>⚙️ Backend Security & Mechanics</h2>
+                    <div class="box" style="text-align: left; font-size: 0.7em;">
+                        <ul>
+                            <li><strong>Concurrency Mutex:</strong> A global lock ensuring only one heavy AI forecast runs simultaneously, protecting against DDoS and API exhaustion.</li>
+                            <li><strong>Regex Validation:</strong> Strict pre-flight checks ensure queries are explicitly political before hitting LLM APIs.</li>
+                            <li><strong>In-Memory Cache:</strong> 60-minute TTL cache returns instant forecasts for recurring queries.</li>
+                            <li><strong>Deep Diagnostics:</strong> Custom logging captures uncaught exceptions, stream events, and fallback triggers.</li>
+                        </ul>
+                    </div>
+				</section>
+
+                <!-- Slide 12: Conclusion -->
+				<section>
+					<h2>Ready to Forecast?</h2>
+					<p>ElectIQ transforms raw data and web sentiment into actionable, real-time election intelligence.</p>
+                    <br/>
+                    <a href="https://aielectionforecastingbot-1.onrender.com" target="_blank" style="background: linear-gradient(90deg, #00f2fe, #4facfe); color: #0b0f19; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 0.8em;">View Live Demo</a>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+		<!-- Add highlight.js for the JSON code block -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+                transition: 'fade',
+                backgroundTransition: 'fade',
+                autoAnimate: true,
+                center: true,
+                plugins: [ RevealHighlight ]
+			});
+		</script>
+	</body>
+</html>

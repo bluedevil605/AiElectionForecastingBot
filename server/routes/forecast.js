@@ -59,30 +59,44 @@ router.post('/', async (req, res) => {
 
         // Prompt consolidated for Gemini (Token Reduced schema representation)
         const consolidatedPrompt = `
-You are an election forecasting expert. Use web search for current data.
-Do not hallucinate. Cite sources. Return ONLY valid JSON.
-Keep "explanation" fields extremely brief to save tokens. Max 4 candidates.
-Search for Wikipedia Commons SVG logo URL for each party if available and return it in party_logo_url.
+You are an expert political data analyst. Your task is to forecast the election specified in the query.
+CRITICAL INSTRUCTIONS:
+1. Use live web search to find the most up-to-date information, polls, and news for this specific election. Do NOT rely solely on past election results.
+2. Identify the major candidates/parties actually expected to compete. (Max 4 candidates).
+3. Provide realistic win probabilities (summing to ~100%) and projected vote shares.
+4. Find the official Wikipedia Commons SVG logo URL for each party, and their standard color.
+5. You MUST return ONLY valid JSON. No markdown formatting (\`\`\`json), no preamble, no trailing text.
 
 Target Election/Query: "${query}"
-Today's date is ${today}.
+Today's Date: ${today}
 
-JSON SCHEMA:
+REQUIRED JSON SCHEMA:
 {
-  "election_status": "upcoming"|"ongoing"|"completed",
-  "actual_result": { "winner": "str", "winner_party": "str", "vote_share": 51.5, "margin": "str" } | null,
+  "election_status": "upcoming" | "ongoing" | "completed",
+  "actual_result": null,
   "candidates": [
-    { "name": "str", "party": "str", "party_logo_url": "str", "party_color": "str", "party_abbreviation": "str", "winProbability": 65.5, "projectedVoteShare": 51.2, "momentum": "rising"|"falling"|"stable", "sentimentScore": 75, "status": "active"|"withdrew" }
+    {
+      "name": "Candidate or Party Leader Name",
+      "party": "Full Party Name",
+      "party_logo_url": "Valid Wikipedia Commons SVG URL",
+      "party_color": "e.g. Blue, Red, Saffron, Green",
+      "party_abbreviation": "e.g. DEM, GOP, BJP, INC",
+      "winProbability": 45.5,
+      "projectedVoteShare": 42.1,
+      "momentum": "rising" | "falling" | "stable",
+      "sentimentScore": 75,
+      "status": "active"
+    }
   ],
-  "confidenceLevel": "high"|"medium"|"low",
-  "marginOfVictoryEstimate": "str",
+  "confidenceLevel": "high" | "medium" | "low",
+  "marginOfVictoryEstimate": "e.g. Tight, Landslide, Narrow",
   "explanation": {
-    "summary": "Short 2 sentence summary.",
-    "topDecisiveFactors": [{"factor": "str (Descriptive 4-8 word phrase, e.g. 'Economic Anxiety & High Inflation')", "impact": 8.5}],
-    "historicalComparison": "Short 1 sentence.",
-    "riskFactors": ["str"]
+    "summary": "1-2 sentence analytical summary.",
+    "topDecisiveFactors": [{"factor": "Key issue", "impact": 8.5}],
+    "historicalComparison": "1 sentence context.",
+    "riskFactors": ["Key risk 1"]
   },
-  "sources": ["url1"]
+  "sources": ["https://..."]
 }
 `.trim();
 
@@ -90,16 +104,16 @@ JSON SCHEMA:
         isRequestInProgress = true;
         
         let rawResponse;
-        let finalModel = 'groq';
+        let finalModel = 'gemini';
 
         try {
-            console.log(`\n=== MASTER AGENT STARTING (GROQ API PRIMARY STREAMING): ${query} ===`);
-            rawResponse = await callGroq(consolidatedPrompt, res);
-        } catch (groqErr) {
-            console.warn(`[Forecast Route] Groq primary failed (${groqErr.message}). Falling back to Gemini...`);
-            console.log(`\n=== MASTER AGENT FALLBACK (GEMINI STREAMING SECONDARY): ${query} ===`);
-            finalModel = 'gemini';
+            console.log(`\n=== MASTER AGENT STARTING (GEMINI API PRIMARY STREAMING): ${query} ===`);
             rawResponse = await callGemini(consolidatedPrompt, res);
+        } catch (geminiErr) {
+            console.warn(`[Forecast Route] Gemini primary failed (${geminiErr.message}). Falling back to Groq...`);
+            console.log(`\n=== MASTER AGENT FALLBACK (GROQ STREAMING SECONDARY): ${query} ===`);
+            finalModel = 'groq';
+            rawResponse = await callGroq(consolidatedPrompt, res);
         }
         
         let finalForecast;

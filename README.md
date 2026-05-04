@@ -1,5 +1,4 @@
-# 🔮 ElectIQ : AI Election Forecasting Bot
-
+# 🔮 ElectIQ: AI Election Forecasting Bot
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB.svg)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933.svg)
