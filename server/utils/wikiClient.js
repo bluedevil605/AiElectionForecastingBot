@@ -5,7 +5,17 @@
  */
 async function fetchWikiContext(query) {
     try {
-        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query + ' result winner')}&format=json&origin=*`;
+        // Extract year from query if present
+        const yearMatch = query.match(/\b(20\d{2})\b/);
+        const year = yearMatch ? yearMatch[1] : new Date().getFullYear().toString();
+        
+        // Ensure "election" and year are in the search query
+        let searchQuery = query.toLowerCase().includes('election') ? query : `${query} election`;
+        if (!searchQuery.includes(year)) {
+            searchQuery = `${searchQuery} ${year}`;
+        }
+
+        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`;
         const searchResponse = await fetch(searchUrl);
         
         if (!searchResponse.ok) {
@@ -19,8 +29,18 @@ async function fetchWikiContext(query) {
             return "No relevant Wikipedia articles found.";
         }
 
-        const topTitle = searchData.query.search[0].title;
-        const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topTitle)}`;
+        // Find the first result whose title contains the year
+        let topTitle = searchData.query.search[0].title;
+        for (const item of searchData.query.search) {
+            if (item.title.includes(year)) {
+                topTitle = item.title;
+                break;
+            }
+        }
+
+        console.log(`[WikiClient] Exact Wikipedia page selected: "${topTitle}"`);
+
+        const summaryUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=true&titles=${encodeURIComponent(topTitle)}&format=json&origin=*`;
         const summaryResponse = await fetch(summaryUrl);
 
         if (!summaryResponse.ok) {
@@ -29,8 +49,16 @@ async function fetchWikiContext(query) {
         }
 
         const summaryData = await summaryResponse.json();
-        if (summaryData && summaryData.extract) {
-            return summaryData.extract;
+        const pages = summaryData.query?.pages;
+        if (pages) {
+            const pageId = Object.keys(pages)[0];
+            const extract = pages[pageId].extract;
+            if (extract) {
+                // Strip basic HTML tags from the extract
+                const cleanExtract = extract.replace(/<\/?[^>]+(>|$)/g, "");
+                console.log(`[WikiClient] Extract fetched:\n${cleanExtract.substring(0, 500)}...`);
+                return cleanExtract;
+            }
         }
 
         return "No summary extract available on Wikipedia.";

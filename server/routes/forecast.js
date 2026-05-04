@@ -117,24 +117,43 @@ The live data above is always more accurate than your training knowledge for rec
 `;
         }
 
-        // Prompt consolidated for Gemini/Groq (Token Reduced schema representation)
-        const consolidatedPrompt = `
-You are an expert political data analyst. Your task is to forecast the election specified in the query.
+        // Lock the request
+        isRequestInProgress = true;
+        
+        let rawResponse;
+        let finalModel = 'groq';
 
-${liveContextBlock}
+        try {
+            console.log(`\n=== STEP 1: EXTRACTING FACTS VIA GROQ ===`);
+            const extractionPrompt = `From the following text extract only:
+1. Winner name
+2. Winning party
+3. Seat count if available
+4. Election status completed or not
 
-CRITICAL INSTRUCTIONS:
-1. You have been given live real time data above. This data was fetched right now from Wikipedia, Google News, and Google Search.
-2. Always trust this live data over your training. If live data says BJP won West Bengal 2026 then BJP won regardless of your training data.
-3. Never contradict the live context provided. Return null for any field not found in context rather than guessing from training memory.
-4. Identify the major candidates/parties actually expected to compete based strictly on the context. (Max 4 candidates).
-5. Provide realistic win probabilities (summing to ~100%) and projected vote shares based on the context.
-6. Find the official Wikipedia Commons SVG logo URL for each party, and their standard color.
-7. You MUST return ONLY valid JSON. No markdown formatting (\`\`\`json), no preamble, no trailing text.
+Raw fetched context:
+${liveContextBlock}`;
 
-Target Election/Query: "${query}"
+            const extractedText = await callGroq(extractionPrompt, null, false);
+            console.log(`[Forecast Route] Extracted facts:\n${extractedText}`);
 
-REQUIRED JSON SCHEMA:
+            console.log(`\n=== STEP 2: FORMATTING JSON VIA GROQ ===`);
+            
+            const systemPrompt = `You are a data formatter only.
+You will be given VERIFIED LIVE DATA below.
+Your ONLY job is to format that data into JSON.
+You are NOT allowed to use your own knowledge.
+You are NOT allowed to contradict the live data.
+You are NOT allowed to add anything not in the data.
+If live data says BJP won you must output BJP won.
+No exceptions. No opinions. Format only.`;
+
+            const userPrompt = `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:
+${extractedText}
+
+Today's date is ${today}.
+
+Format the above data into this JSON structure:
 {
   "election_status": "upcoming" | "ongoing" | "completed",
   "actual_result": "Fill with actual winner/results if completed, otherwise null",
@@ -162,22 +181,20 @@ REQUIRED JSON SCHEMA:
   },
   "sources": ["https://..."]
 }
-`.trim();
 
-        // Lock the request
-        isRequestInProgress = true;
-        
-        let rawResponse;
-        let finalModel = 'groq';
+CRITICAL: Only use data from above. Nothing else.`;
 
-        try {
-            console.log(`\n=== MASTER AGENT STARTING (GROQ API PRIMARY STREAMING): ${query} ===`);
-            rawResponse = await callGroq(consolidatedPrompt, res);
+            const messages = [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: userPrompt }
+            ];
+
+            rawResponse = await callGroq(messages, res, true);
         } catch (groqErr) {
             console.warn(`[Forecast Route] Groq primary failed (${groqErr.message}). Falling back to Gemini...`);
             console.log(`\n=== MASTER AGENT FALLBACK (GEMINI STREAMING SECONDARY): ${query} ===`);
             finalModel = 'gemini';
-            rawResponse = await callGemini(consolidatedPrompt, res);
+            rawResponse = await callGemini(`LIVE VERIFIED DATA:\n${liveContextBlock}\n\n` + userPrompt, res); // Fallback prompt for Gemini
         }
         
         let finalForecast;

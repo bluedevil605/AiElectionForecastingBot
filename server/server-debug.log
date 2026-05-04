@@ -610,3 +610,15 @@ Server listening on port 5000
 Server listening on port 5000
 [2026-05-04T22:56:50.704Z] Health: http://localhost:5000/api/health
 
+[2026-05-04T23:13:19.641Z] --- SERVER STARTING ---
+[2026-05-04T23:13:19.649Z] Routers loaded successfully.
+[2026-05-04T23:13:19.663Z] 
+Server listening on port 5000
+[2026-05-04T23:13:19.664Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:13:35.280Z] --- SERVER STARTING ---
+[2026-05-04T23:13:35.289Z] Routers loaded successfully.
+[2026-05-04T23:13:35.304Z] 
+Server listening on port 5000
+[2026-05-04T23:13:35.304Z] Health: http://localhost:5000/api/health
+
