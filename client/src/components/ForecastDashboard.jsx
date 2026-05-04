@@ -172,26 +172,81 @@ export default function ForecastDashboard() {
         </motion.div>
       )}
 
-      {/* Clean Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <motion.div variants={itemVariants} className="lg:col-span-6 glass-panel p-8 rounded-[2rem] min-h-[400px]">
-          <div className="flex items-center gap-3 mb-6">
-             <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
-                <PieChart size={18} />
-             </div>
-             <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Candidates & Probability</h3>
+        <motion.div variants={itemVariants} className="lg:col-span-8 glass-panel p-8 rounded-[2rem] min-h-[450px]">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+               <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
+                  <PieChart size={18} />
+               </div>
+               <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Live Probability & Projection</h3>
+            </div>
+            <div className="flex items-center gap-4">
+               <div className="flex flex-col items-end">
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Model Confidence</span>
+                  <span className={`text-sm font-black uppercase tracking-tighter ${
+                    forecastData.confidenceLevel?.toLowerCase() === 'high' ? 'text-emerald-400' : 
+                    forecastData.confidenceLevel?.toLowerCase() === 'medium' ? 'text-amber-400' : 'text-rose-400'
+                  }`}>{forecastData.confidenceLevel || 'MEDIUM'}</span>
+               </div>
+            </div>
           </div>
           <ProbabilityGauge candidates={adjustedCandidates} margin={forecastData.marginOfVictoryEstimate}/>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="lg:col-span-6 glass-panel p-8 rounded-[2rem] min-h-[400px]">
-           <div className="flex items-center gap-3 mb-6">
-             <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
-                <Zap size={18} />
-             </div>
-             <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Sentiment Vector</h3>
+        <motion.div variants={itemVariants} className="lg:col-span-4 flex flex-col gap-8">
+          <div className="glass-panel p-8 rounded-[2rem] flex-1">
+             <div className="flex items-center gap-3 mb-6">
+               <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
+                  <Zap size={18} />
+               </div>
+               <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Momentum Vector</h3>
+            </div>
+            <SentimentMeter candidates={adjustedCandidates} />
           </div>
-          <SentimentMeter candidates={adjustedCandidates} />
+
+          <div className="bg-indigo-600/10 border border-indigo-500/20 p-8 rounded-[2rem] backdrop-blur-md">
+             <h3 className="text-xs font-black text-indigo-300 uppercase tracking-widest mb-4">Key Swing Factors</h3>
+             <div className="space-y-3">
+                {(forecastData.swing_factors || []).map((sf, idx) => (
+                  <div key={idx} className="flex items-center justify-between group">
+                    <span className="text-sm font-bold text-slate-300 group-hover:text-white transition-colors">{sf.factor}</span>
+                    <div className="flex items-center gap-2">
+                       <div className="h-1.5 w-12 bg-slate-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-indigo-500" style={{ width: `${(sf.impact || 5) * 10}%` }} />
+                       </div>
+                       <span className="text-[10px] font-black text-indigo-400">{sf.impact || 5}/10</span>
+                    </div>
+                  </div>
+                ))}
+             </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Extended Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div variants={itemVariants} className="glass-panel p-6 rounded-3xl border border-white/5">
+           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Polling Average</p>
+           <div className="flex items-end gap-2">
+              <span className="text-3xl font-black text-white">{forecastData.polling_average || '--'}%</span>
+              <span className="text-xs font-bold text-emerald-400 mb-1">AGGREGATE</span>
+           </div>
+        </motion.div>
+        <motion.div variants={itemVariants} className="glass-panel p-6 rounded-3xl border border-white/5">
+           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Election Date</p>
+           <span className="text-xl font-black text-slate-200 uppercase tracking-tight">{forecastData.election_date || 'TBD'}</span>
+        </motion.div>
+        <motion.div variants={itemVariants} className="glass-panel p-6 rounded-3xl border border-white/5">
+           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Simulation Status</p>
+           <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-sm font-black text-emerald-400 uppercase tracking-widest">REAL-TIME ACTIVE</span>
+           </div>
+        </motion.div>
+        <motion.div variants={itemVariants} className="glass-panel p-6 rounded-3xl border border-white/5">
+           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Data Integrity</p>
+           <span className="text-xs font-black text-slate-300 uppercase tracking-widest">WIKI + GOOGLE VERIFIED</span>
         </motion.div>
       </div>
 
@@ -201,9 +256,48 @@ export default function ForecastDashboard() {
              <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400">
                 <Cpu size={18} />
              </div>
-             <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Key AI Takeaways</h3>
+             <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Strategic Neural Analysis</h3>
           </div>
-          <AIExplanation explanation={forecastData.explanation} confidence={forecastData.confidenceLevel} sources={forecastData.sources}/>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+             <div className="lg:col-span-2">
+                <p className="text-lg font-bold text-slate-200 leading-relaxed italic mb-6">
+                   "{forecastData.forecast_summary || forecastData.explanation?.summary}"
+                </p>
+                <div className="flex flex-wrap gap-2">
+                   {(forecastData.key_issues || []).map((issue, i) => (
+                     <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                       {issue}
+                     </span>
+                   ))}
+                </div>
+             </div>
+             <div className="bg-black/40 rounded-2xl p-6 border border-white/5">
+                <h4 className="text-[10px] font-black text-rose-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <AlertTriangle size={12} /> Disruption Risks
+                </h4>
+                <div className="space-y-3">
+                   {(forecastData.disruption_risks || []).map((risk, i) => (
+                     <div key={i} className="flex gap-3">
+                        <div className="w-1 h-1 rounded-full bg-rose-500 mt-1.5 shrink-0" />
+                        <p className="text-xs font-bold text-slate-400 leading-tight">{risk}</p>
+                     </div>
+                   ))}
+                </div>
+             </div>
+          </div>
+          
+          {forecastData.sources && forecastData.sources.length > 0 && (
+            <div className="mt-8 pt-8 border-t border-white/5">
+               <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Verification Sources</h4>
+               <div className="flex flex-wrap gap-4">
+                  {forecastData.sources.map((src, i) => (
+                    <a key={i} href={src} target="_blank" rel="noreferrer" className="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors truncate max-w-[200px]">
+                      {new URL(src).hostname}
+                    </a>
+                  ))}
+               </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </motion.div>

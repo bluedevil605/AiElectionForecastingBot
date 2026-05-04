@@ -126,10 +126,17 @@ The live data above is always more accurate than your training knowledge for rec
         try {
             console.log(`\n=== STEP 1: EXTRACTING FACTS VIA GROQ ===`);
             const extractionPrompt = `From the following text extract only:
-1. Winner name
-2. Winning party
-3. Seat count if available
-4. Election status completed or not
+1. Winner name (if completed)
+2. Winning party (if completed)
+3. Seat count or Polling results
+4. Election status (upcoming, ongoing, or completed)
+5. Major candidates/parties declared
+6. Recent opinion poll averages (if available)
+7. Alliances formed (e.g., NDA, INDIA)
+8. Identify if the election is schedule for the future (provide date if found).
+
+If the election is upcoming, extract as much strategic detail as possible.
+If the election is completed, extract only the final official results.
 
 Raw fetched context:
 ${liveContextBlock}`;
@@ -146,7 +153,23 @@ You are NOT allowed to use your own knowledge.
 You are NOT allowed to contradict the live data.
 You are NOT allowed to add anything not in the data.
 If live data says BJP won you must output BJP won.
-No exceptions. No opinions. Format only.`;
+No exceptions. No opinions. Format only.
+
+If this election has NOT happened yet:
+- Set election_status to upcoming
+- Do NOT set a winner
+- DO provide winProbability for each candidate
+- DO provide projectedVoteShare for each candidate
+- DO provide pollingAverage if available
+- DO provide momentum for each candidate
+- DO provide forecastSummary explaining who is likely to win and why
+- DO provide swingFactors that will decide result
+- DO provide confidenceLevel of the forecast
+- Base forecast on latest available polling data
+- Base forecast on historical voting patterns
+- Base forecast on incumbency advantage
+- Base forecast on current political climate
+Use your training knowledge for upcoming elections since no official result exists yet.`;
 
             const userPrompt = `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:
 ${extractedText}
@@ -156,33 +179,48 @@ Today's date is ${today}.
 Format the above data into this JSON structure:
 {
   "election_status": "upcoming" | "ongoing" | "completed",
-  "actual_result": "Fill with actual winner/results if completed, otherwise null",
+  "election_date": "date string or approximate",
+  "actual_result": "object with winner_name, winning_party, seat_count if completed, else null",
   "candidates": [
     {
-      "name": "Candidate or Party Leader Name",
-      "party": "Full Party Name",
-      "party_logo_url": "Valid Wikipedia Commons SVG URL",
-      "party_color": "e.g. Blue, Red, Saffron, Green",
-      "party_abbreviation": "e.g. DEM, GOP, BJP, INC",
-      "winProbability": 45.5,
-      "projectedVoteShare": 42.1,
-      "momentum": "rising" | "falling" | "stable",
-      "sentimentScore": 75,
+      "name": "string",
+      "party": "string",
+      "party_logo_url": "Wikipedia Commons SVG URL",
+      "party_color": "hex or named color",
+      "party_abbreviation": "string",
+      "winProbability": number 0 to 100,
+      "projectedVoteShare": number,
+      "momentum": "rising" | "stable" | "falling",
       "status": "active"
     }
   ],
-  "confidenceLevel": "high" | "medium" | "low",
-  "marginOfVictoryEstimate": "e.g. Tight, Landslide, Narrow",
-  "explanation": {
-    "summary": "1-2 sentence analytical summary based strictly on live context.",
-    "topDecisiveFactors": [{"factor": "Key issue", "impact": 8.5}],
-    "historicalComparison": "1 sentence context.",
-    "riskFactors": ["Key risk 1"]
-  },
-  "sources": ["https://..."]
+  "forecast_summary": "2-3 sentence prediction for upcoming, or summary for completed",
+  "confidenceLevel": "low" | "medium" | "high",
+  "swing_factors": [
+    { "factor": "string", "impact": number 1-10 }
+  ],
+  "polling_average": number or null,
+  "historical_context": "previous election result",
+  "key_issues": ["issue1", "issue2", "issue3"],
+  "disruption_risks": ["risk1", "risk2"]
 }
 
-CRITICAL: Only use data from above. Nothing else.`;
+Example of correct upcoming election response:
+For a state election where Party A leads polls:
+{
+  "election_status": "upcoming",
+  "candidates": [
+    { "name": "Leader A", "party": "Party A", "winProbability": 65, "momentum": "rising", "status": "active" },
+    { "name": "Leader B", "party": "Party B", "winProbability": 35, "momentum": "falling", "status": "active" }
+  ],
+  "forecast_summary": "Party A is favored to win based on recent polls showing 40 percent support versus Party B at 32 percent. Incumbency and development agenda are key factors.",
+  "confidenceLevel": "medium"
+}
+
+CRITICAL: 
+1. For COMPLETED elections: ONLY use data from the verified context above. Do NOT use your own knowledge.
+2. For UPCOMING elections: Use the verified context as the primary source, but you MUST use your own training knowledge to fill in candidates, win probabilities, polling trends, and analysis if the live data is sparse. Provide a realistic, data-driven forecast.
+3. Output ONLY valid JSON. No conversational text.`;
 
             const messages = [
                 { role: "system", content: systemPrompt },
@@ -201,9 +239,25 @@ CRITICAL: Only use data from above. Nothing else.`;
         try {
             console.log("RAW RESPONSE FROM MODEL:", rawResponse);
             finalForecast = JSON.parse(rawResponse);
+            
+            // Step 3: Backend Validation for Upcoming/Completed
+            if (finalForecast.election_status === 'completed') {
+                if (!finalForecast.actual_result || !finalForecast.actual_result.winner_name) {
+                    throw new Error("Completed election missing winner data.");
+                }
+            } else if (finalForecast.election_status === 'upcoming') {
+                // Ensure win probabilities add up to ~100
+                const totalProb = finalForecast.candidates?.reduce((sum, c) => sum + (c.winProbability || 0), 0);
+                if (totalProb > 0 && (totalProb < 80 || totalProb > 120)) {
+                    console.warn(`[Validation] Win probabilities sum to ${totalProb}, normalizing...`);
+                    finalForecast.candidates.forEach(c => {
+                        c.winProbability = (c.winProbability / totalProb) * 100;
+                    });
+                }
+            }
         } catch (err) {
-            console.error('[Forecast Route] Failed to parse JSON from streamed text.', err.message);
-            res.write('data: {"error": "Failed to generate valid forecast data. Please try again."}\n\n');
+            console.error('[Forecast Route] Validation/Parsing failed.', err.message);
+            res.write(`data: ${JSON.stringify({ error: `Analysis error: ${err.message}. Please try again.` })}\n\n`);
             res.write('data: [DONE]\n\n');
             return res.end();
         }

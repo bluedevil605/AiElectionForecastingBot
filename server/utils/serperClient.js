@@ -25,10 +25,19 @@ async function fetchSerperContext(query) {
         const queries = [
             `${query} winner declared result ${suffix}`.trim(),
             `${query} final seat count ${suffix}`.trim(),
-            `${query} Election Commission ${suffix}`.trim()
+            `${query} Election Commission ${suffix}`.trim(),
+            `${query} opinion poll survey ${suffix}`.trim(),
+            `${query} candidates declared ${suffix}`.trim(),
+            `${query} prediction forecast ${suffix}`.trim(),
+            `${query} alliance seat sharing ${suffix}`.trim()
         ];
 
-        console.log(`[SerperClient] Executing 3 parallel queries:`);
+        if (isIndian) {
+            queries.push(`${query} BJP INC TMC survey`.trim());
+            queries.push(`${query} NDA INDIA alliance survey`.trim());
+        }
+
+        console.log(`[SerperClient] Executing ${queries.length} parallel queries:`);
         queries.forEach((q, i) => console.log(`  Query ${i+1}: "${q}"`));
 
         const fetchQuery = async (q) => {

@@ -186,19 +186,18 @@ export default function CompletedElectionDashboard({ forecastData, query }) {
            initial={{ opacity: 0, x: -20 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.9 }}
-           className="xl:col-span-9 bg-black/20 border border-white/5 rounded-[2rem] p-10 shadow-xl flex flex-col overflow-hidden"
+           className="xl:col-span-8 bg-black/20 border border-white/5 rounded-[2rem] p-10 shadow-xl flex flex-col overflow-hidden"
          >
             <SectionHeader title="CERTIFIED SEGMENTATION ARCHIVE" icon={ShieldCheck} />
             <div className="overflow-x-auto">
                <table className="w-full text-left text-base border-collapse min-w-[800px]">
                   <thead>
-                     <tr className="border-b border-white/5 text-xs tracking-[0.3em] uppercase text-slate-500 bg-white/20">
+                     <tr className="border-b border-white/5 text-xs tracking-[0.3em] uppercase text-slate-500">
                         <th className="py-5 pl-6 font-black w-14">Logo</th>
                         <th className="py-5 font-black">Entity</th>
                         <th className="py-5 font-black text-center">Node</th>
                         <th className="py-5 font-black text-right">Aggregate %</th>
-                        <th className="py-5 font-black text-right">Vector Change</th>
-                        <th className="py-5 pr-6 font-black text-right">Status</th>
+                        <th className="py-5 font-black text-right">Status</th>
                      </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
@@ -211,19 +210,14 @@ export default function CompletedElectionDashboard({ forecastData, query }) {
                               </td>
                               <td className="py-6">
                                   <div className="flex items-center gap-4">
-                                      <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: getPartyColor(c.party), boxShadow: `0 0 10px ${getPartyColor(c.party)}66`}} />
+                                      <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: getPartyColor(c.party)}} />
                                       <span className="font-black text-white text-base tracking-tight uppercase">{c.name}</span>
                                   </div>
                               </td>
                               <td className="py-6 text-center">
                                   <span className="px-3 py-1 bg-white/5 rounded-lg border border-white/5 text-xs font-black tracking-widest text-slate-400 group-hover:text-indigo-400 transition-colors uppercase">{c.party}</span>
                               </td>
-                              <td className="py-6 font-black text-white text-right tabular-nums text-lg">{c.projectedVoteShare}%</td>
-                              <td className="py-6 text-right">
-                                  <span className={`font-black tabular-nums text-sm ${isWinner ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                      {isWinner ? '+4.7%' : '-2.8%'}
-                                  </span>
-                              </td>
+                              <td className="py-6 font-black text-white text-right tabular-nums text-lg">{c.projectedVoteShare || c.projected_vote_share || '--'}%</td>
                               <td className="py-6 pr-6 text-right">
                                  {isWinner ? (
                                     <div className="flex justify-end">
@@ -241,44 +235,54 @@ export default function CompletedElectionDashboard({ forecastData, query }) {
                   </tbody>
                </table>
             </div>
+
+            {/* Swing Regions Table */}
+            <div className="mt-12 pt-8 border-t border-white/5">
+               <SectionHeader title="KEY SWING SEGMENTS" icon={Layers} />
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(forecastData.swing_factors || []).map((sf, idx) => (
+                    <div key={idx} className="bg-white/5 rounded-xl p-4 flex justify-between items-center border border-white/5">
+                       <span className="text-sm font-bold text-slate-300">{sf.factor}</span>
+                       <span className="text-xs font-black text-indigo-400">IMPACT: {sf.impact}/10</span>
+                    </div>
+                  ))}
+               </div>
+            </div>
          </motion.div>
 
          <motion.div 
            initial={{ opacity: 0, x: 20 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 1.0 }}
-           className="xl:col-span-3 flex flex-col gap-6"
+           className="xl:col-span-4 flex flex-col gap-6"
          >
             <div className="bg-indigo-600/10 border border-indigo-500/20 rounded-[2rem] p-8 shadow-xl flex-1 backdrop-blur-md">
                <h3 className="text-sm font-black text-indigo-300 uppercase tracking-widest mb-6 flex items-center gap-2">
-                 <Lightbulb size={14} className="text-indigo-400" /> SYSTEM INSIGHTS
+                 <Lightbulb size={14} className="text-indigo-400" /> HISTORICAL ARCHIVE
                </h3>
                <div className="space-y-6">
-                  {forecastData?.explanation?.summary ? [
-                     forecastData.explanation.summary,
-                     forecastData.explanation.historicalComparison || "Historic data comparison not generated for token optimization.",
-                     ...(forecastData.explanation.riskFactors || [])
-                   ]
-                   .filter(Boolean)
-                   .map((text, idx) => (
-                     <div key={idx} className="flex gap-4">
-                         <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
-                         <p className="text-sm font-bold text-indigo-200/70 leading-relaxed italic">"{text}"</p>
-                     </div>
-                   )) : (
-                     <div className="flex gap-4">
-                         <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
-                         <p className="text-sm font-bold text-indigo-200/70 leading-relaxed italic">"Detailed takeaways omitted from analysis."</p>
-                     </div>
-                   )}
+                  <p className="text-sm font-bold text-indigo-200/70 leading-relaxed italic">
+                     "{forecastData.historical_context || "No historical baseline retrieved for this node."}"
+                  </p>
+                  <div className="p-4 bg-black/40 rounded-2xl border border-white/5">
+                     <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Primary Drivers</h4>
+                     <ul className="space-y-2">
+                        {(forecastData.key_issues || []).map((issue, i) => (
+                          <li key={i} className="flex items-center gap-2 text-xs font-bold text-slate-300">
+                             <div className="w-1 h-1 bg-indigo-500 rounded-full" /> {issue}
+                          </li>
+                        ))}
+                     </ul>
+                  </div>
                </div>
             </div>
             
-            <motion.div whileHover={{ scale: 1.02 }} className="bg-white/5 border border-white/10 p-8 rounded-[2rem] shadow-2xl flex flex-col items-center justify-center text-center cursor-pointer group">
-                <CheckCircle2 size={32} className="text-emerald-500 mb-4 opacity-70 group-hover:scale-125 transition-transform" />
-                <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Status Code</p>
-                <p className="text-base font-black text-white tracking-widest">FINALIZED</p>
-            </motion.div>
+            <div className="bg-white/5 border border-white/10 p-8 rounded-[2rem] shadow-2xl">
+                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Neural Summary</h4>
+                <p className="text-sm font-bold text-slate-300 leading-relaxed">
+                   {forecastData.explanation?.summary || forecastData.forecast_summary}
+                </p>
+            </div>
          </motion.div>
       </div>
 

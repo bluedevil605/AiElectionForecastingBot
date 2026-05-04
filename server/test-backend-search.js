@@ -4,7 +4,7 @@ async function testSearch() {
     const response = await fetch('http://localhost:5000/api/forecast', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: "Bihar Election 2025" })
+      body: JSON.stringify({ query: "US Presidential Election 2028" })
     });
     
     console.log('Status Code:', response.status);

@@ -15,28 +15,44 @@ async function fetchWikiContext(query) {
             searchQuery = `${searchQuery} ${year}`;
         }
 
-        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`;
-        const searchResponse = await fetch(searchUrl);
-        
-        if (!searchResponse.ok) {
-            console.warn(`Wikipedia search API failed with status ${searchResponse.status}`);
-            return "Wikipedia search failed.";
-        }
+        // Expanded search for upcoming elections
+        const queries = [
+            searchQuery,
+            `${query} opinion polls ${year}`,
+            `${query} candidates ${year}`,
+            `${query} previous result`
+        ];
 
-        const searchData = await searchResponse.json();
+        console.log(`[WikiClient] Fetching context for potentially upcoming election...`);
         
-        if (!searchData.query || !searchData.query.search || searchData.query.search.length === 0) {
-            return "No relevant Wikipedia articles found.";
-        }
+        const fetchWiki = async (q) => {
+            const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`;
+            const searchResponse = await fetch(searchUrl);
+            if (!searchResponse.ok) return null;
+            return await searchResponse.json();
+        };
 
-        // Find the first result whose title contains the year
-        let topTitle = searchData.query.search[0].title;
-        for (const item of searchData.query.search) {
-            if (item.title.includes(year)) {
-                topTitle = item.title;
-                break;
+        const searchResults = await Promise.all(queries.map(fetchWiki));
+        
+        // Find the best page title (containing the year)
+        let topTitle = null;
+        for (const data of searchResults) {
+            if (data?.query?.search) {
+                for (const item of data.query.search) {
+                    if (item.title.includes(year)) {
+                        topTitle = item.title;
+                        break;
+                    }
+                }
             }
+            if (topTitle) break;
         }
+
+        if (!topTitle && searchResults[0]?.query?.search?.[0]) {
+            topTitle = searchResults[0].query.search[0].title;
+        }
+
+        if (!topTitle) return "No relevant Wikipedia articles found.";
 
         console.log(`[WikiClient] Exact Wikipedia page selected: "${topTitle}"`);
 

@@ -622,3 +622,39 @@ Server listening on port 5000
 Server listening on port 5000
 [2026-05-04T23:13:35.304Z] Health: http://localhost:5000/api/health
 
+[2026-05-04T23:24:45.734Z] --- SERVER STARTING ---
+[2026-05-04T23:24:45.743Z] Routers loaded successfully.
+[2026-05-04T23:24:45.755Z] 
+Server listening on port 5000
+[2026-05-04T23:24:45.756Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:24:45.756Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-05-04T23:24:45.757Z] [ProcessExit] Code: 0
+[2026-05-04T23:24:54.219Z] --- SERVER STARTING ---
+[2026-05-04T23:24:54.227Z] Routers loaded successfully.
+[2026-05-04T23:24:54.240Z] 
+Server listening on port 5000
+[2026-05-04T23:24:54.240Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:25:33.602Z] --- SERVER STARTING ---
+[2026-05-04T23:25:33.610Z] Routers loaded successfully.
+[2026-05-04T23:25:33.623Z] 
+Server listening on port 5000
+[2026-05-04T23:25:33.624Z] Health: http://localhost:5000/api/health
+
+[2026-05-04T23:25:33.625Z] [ServerEvent:Error] Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2026-05-04T23:25:33.625Z] [ProcessExit] Code: 0
+[2026-05-04T23:25:41.977Z] --- SERVER STARTING ---
+[2026-05-04T23:25:41.985Z] Routers loaded successfully.
+[2026-05-04T23:25:41.999Z] 
+Server listening on port 5000
+[2026-05-04T23:25:41.999Z] Health: http://localhost:5000/api/health
+
