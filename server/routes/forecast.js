@@ -103,7 +103,8 @@ KNOWN ELECTION CONTEXT:
 West Bengal has 294 seats, majority is 148.
 TMC: Mamata Banerjee (incumbent)
 BJP: main challenger
-2021 result: TMC won 213 seats.
+Left Front / INC: Third major force
+2021 result: TMC won 213 seats, BJP 77 seats.
 Election dates: April 23, 29 and May 21 2026.`;
         }
 
