@@ -23,7 +23,7 @@ async function callGemini(prompt, res = null) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        tools: [{ googleSearch: {} }],
+        tools: [{ google_search: {} }],
         generationConfig: { temperature: 0.1 }
       })
     }
