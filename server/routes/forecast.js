@@ -129,13 +129,13 @@ ${specificContext}
 LIVE DATA FETCHED RIGHT NOW - USE THIS AS TRUTH:
 
 Wikipedia Summary:
-${wikiContext}
+${wikiContext.substring(0, 1500)}
 
 Latest News Headlines:
-${gnewsContext}
+${gnewsContext.substring(0, 1000)}
 
 Google Search Results:
-${serperContext}
+${serperContext.substring(0, 1500)}
 
 ${specificContext}
 
