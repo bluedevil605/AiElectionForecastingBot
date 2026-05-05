@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         if (!query) return res.status(400).json({ error: 'Election query required.' });
 
         // Input validation to prevent non-election queries from hitting the AI
-        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|democrat|republican|referendum|ballot|primary|midterm|politics|parliament|minister|tory|labour|biden|trump|harris|modi|bjp|win|lose|party|leader|seat|federal|assembly|municipal|council|state|uk|us|india|germany|france|mexico|bihar|bengal|up|maharashtra|haryana|tamil|kerala|karnataka|punjab|gujarat|assam|national|voters|vidhan|sabha/i;
+        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|win|lose|party|leader|seat|federal|assembly|municipal|council|state|national|voters|vidhan|sabha/i;
         if (!electionRegex.test(query)) {
             return res.status(400).json({ error: 'Invalid Input: Please enter an election-related query.' });
         }
@@ -89,27 +89,6 @@ router.post('/', async (req, res) => {
         let liveContextBlock = "";
         let specificContext = "";
 
-        // Inject known context for major elections (Step 3 & 7)
-        const qLower = query.toLowerCase();
-        if (qLower.includes("bihar")) {
-            specificContext = `
-KNOWN ELECTION CONTEXT:
-Bihar has 243 seats, majority is 122.
-NDA: Nitish Kumar (JDU+BJP)
-INDIA: Tejashwi Yadav (RJD+INC)
-Nitish Kumar is current Chief Minister.
-2020 result: NDA won 125 seats.`;
-        } else if (qLower.includes("bengal")) {
-            specificContext = `
-KNOWN ELECTION CONTEXT:
-West Bengal has 294 seats, majority is 148.
-TMC: Mamata Banerjee
-BJP: Suvendu Adhikari
-Left Front / INC: Third major force
-RECENT VERIFIED RESULT: BJP WON the election with a sweeping mandate. Mamata Banerjee lost.
-You MUST output BJP as the winner and give BJP 100% win_probability or highest vote share.
-Election dates: Completed.`;
-        }
 
         if (
             wikiContext.includes("failed") && wikiContext.includes("error") && 
@@ -185,14 +164,9 @@ You are NOT allowed to add anything not in the data.
 No exceptions. No opinions. Format only.
 
 You MUST return candidates array.
-If the query mentions "West Bengal", you MUST return EXACTLY 3 candidates:
-1. TMC (Mamata Banerjee)
-2. BJP (Suvendu Adhikari or generic BJP Candidate)
-3. Left Front / INC
 This field is mandatory always.
 For each candidate include these exact fields: name, party, win_probability, projected_vote_share, momentum, status.
 win_probability values must sum to 100 across all returned candidates.
-For West Bengal, you MUST ensure all 3 candidates (TMC, BJP, and Left Front / INC) are given a probability and vote share.
 momentum must be rising stable or falling.
 Never return empty candidates array ever.
 

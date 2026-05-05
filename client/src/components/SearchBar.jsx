@@ -264,16 +264,7 @@ export default function SearchBar() {
           transition={{ delay: 0.5 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
-          <span className="text-sm font-bold text-slate-600 uppercase tracking-widest">Trending Vectors:</span>
-          {['Bihar 2025', 'US Midterms', 'Germany Federal'].map(tag => (
-            <button 
-              key={tag}
-              onClick={() => setLocalQuery(tag)}
-              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-sm font-bold text-slate-400 hover:text-white hover:bg-white/10 transition-all uppercase tracking-wider"
-            >
-              {tag}
-            </button>
-          ))}
+          <span className="text-sm font-bold text-slate-600 uppercase tracking-widest">Global Intelligence Pulse Active</span>
         </motion.div>
       )}
       </div>

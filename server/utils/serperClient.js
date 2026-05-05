@@ -13,8 +13,8 @@ async function fetchSerperContext(query) {
 
     try {
         const queryLower = query.toLowerCase();
-        const isIndian = queryLower.includes('india') || queryLower.includes('bengal') || queryLower.includes('bihar') || queryLower.includes('delhi') || queryLower.includes('kerala') || queryLower.includes('punjab') || queryLower.includes('maharashtra') || queryLower.includes('up') || queryLower.includes('uttar pradesh');
-        const isState = queryLower.includes('assembly') || isIndian; // Broadly assume state for indian queries if they contain state names.
+        const isIndian = queryLower.includes('india') || queryLower.includes('election commission of india') || queryLower.includes('eci');
+        const isState = queryLower.includes('assembly') || queryLower.includes('vidhan sabha') || isIndian; 
         
         let suffix = "";
         if (isIndian) {
