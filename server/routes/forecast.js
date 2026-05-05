@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         if (!query) return res.status(400).json({ error: 'Election query required.' });
 
         // Input validation to prevent non-election queries from hitting the AI
-        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|win|lose|party|leader|seat|federal|assembly|municipal|council|state|national|voters|vidhan|sabha/i;
+        const electionRegex = /election|vote|poll|president|senat|congress|governor|mayor|campaign|candidate|win|lose|party|leader|seat|federal|assembly|municipal|council|state|national|voters|vidhan|sabha|india|us|uk|bihar|bengal|up|delhi|maharashtra|haryana/i;
         if (!electionRegex.test(query)) {
             return res.status(400).json({ error: 'Invalid Input: Please enter an election-related query.' });
         }
@@ -157,11 +157,11 @@ ${liveContextBlock}`;
             
             const systemPrompt = `You are a data formatter only.
 You will be given VERIFIED LIVE DATA below.
-Your ONLY job is to format that data into JSON.
-You are NOT allowed to use your own knowledge.
-You are NOT allowed to contradict the live data.
-You are NOT allowed to add anything not in the data.
-No exceptions. No opinions. Format only.
+Your job is to format that data into JSON.
+You should prioritize the live data provided.
+If the live data is incomplete or missing (especially for UPCOMING elections), you ARE allowed to use your training knowledge to provide a realistic forecast.
+No opinions. Format only.
+No exceptions.
 
 You MUST return candidates array.
 This field is mandatory always.
