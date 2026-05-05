@@ -22,7 +22,24 @@ const getPartyColorFaded = (party) => {
 
 export default function CompletedElectionDashboard({ forecastData, query }) {
   const result = forecastData.actual_result;
-  const candidates = forecastData.candidates || [];
+  const rawCandidates = forecastData.candidates || [];
+  
+  const candidates = [...rawCandidates].sort((a, b) => {
+    // Put the winner first
+    const winnerName = result?.winner_name?.toLowerCase() || '';
+    const winnerParty = result?.winner_party?.toLowerCase() || result?.winning_party?.toLowerCase() || '';
+    
+    const aIsWinner = (a.name?.toLowerCase() === winnerName) || (a.party?.toLowerCase() === winnerParty);
+    const bIsWinner = (b.name?.toLowerCase() === winnerName) || (b.party?.toLowerCase() === winnerParty);
+    
+    if (aIsWinner && !bIsWinner) return -1;
+    if (bIsWinner && !aIsWinner) return 1;
+    
+    // Otherwise sort by projected vote share
+    const shareA = a.projected_vote_share ?? a.projectedVoteShare ?? 0;
+    const shareB = b.projected_vote_share ?? b.projectedVoteShare ?? 0;
+    return shareB - shareA;
+  });
   
   const winnerColor = getPartyColor(result?.winner_party);
   const isGOP = result?.winner_party?.toLowerCase().includes('republican');

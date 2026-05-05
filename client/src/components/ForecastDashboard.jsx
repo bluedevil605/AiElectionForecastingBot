@@ -98,13 +98,23 @@ export default function ForecastDashboard() {
   const adjustedCandidates = useMemo(() => {
     if (!forecastData || !forecastData.candidates) return [];
     const activeCandidates = forecastData.candidates.filter(c => c.status !== 'withdrew');
-    if (forecastData.election_status === 'completed') return activeCandidates;
+    if (forecastData.election_status === 'completed') {
+      return activeCandidates.sort((a, b) => {
+        const shareA = a.projected_vote_share ?? a.projectedVoteShare ?? 0;
+        const shareB = b.projected_vote_share ?? b.projectedVoteShare ?? 0;
+        return shareB - shareA;
+      });
+    }
 
     return activeCandidates.map(c => {
       const rawProb = c.win_probability ?? c.winProbability;
       const base = (rawProb !== null && rawProb !== undefined && !isNaN(parseFloat(rawProb)))
         ? parseFloat(rawProb) : null;
       return { ...c, winProbability: base };
+    }).sort((a, b) => {
+      const probA = a.winProbability ?? 0;
+      const probB = b.winProbability ?? 0;
+      return probB - probA;
     });
   }, [forecastData]);
 
