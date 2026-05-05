@@ -95,8 +95,9 @@ router.post('/', async (req, res) => {
             specificContext = `
 STRATEGIC CONTEXT:
 Region: West Bengal (294 seats, 148 for majority)
-Major Players: TMC (All India Trinamool Congress), BJP (Bharatiya Janata Party), Left Front, Indian National Congress.
-Key Leaders: Mamata Banerjee (TMC), Suvendu Adhikari (BJP).`;
+Major Players: BJP (Bharatiya Janata Party), TMC (All India Trinamool Congress), Left Front, INC.
+Key Leaders: Suvendu Adhikari (BJP), Mamata Banerjee (TMC).
+Recent Analysis: BJP is showing a massive surge in momentum, projected to challenge the incumbent significantly.`;
         } else if (qLower.includes("bihar")) {
             specificContext = `
 STRATEGIC CONTEXT:
@@ -299,20 +300,24 @@ CRITICAL:
             console.log("GROQ RAW:", JSON.stringify(finalForecast));
             console.log("CANDIDATES:", finalForecast.candidates);
             
-            // Step 3: Backend Validation for Upcoming/Completed
-            if (finalForecast.election_status === 'completed') {
-                if (!finalForecast.actual_result || !finalForecast.actual_result.winner_name) {
-                    throw new Error("Completed election missing winner data.");
-                }
-            } else if (finalForecast.election_status === 'upcoming' || finalForecast.election_status === 'ongoing') {
-                // Ensure win probabilities add up to ~100
+            // Step 3: Backend Validation & Normalization
+            if (finalForecast.election_status === 'upcoming' || finalForecast.election_status === 'ongoing') {
                 const totalProb = finalForecast.candidates?.reduce((sum, c) => sum + (c.win_probability || c.winProbability || 0), 0);
-                if (totalProb > 0 && (totalProb < 80 || totalProb > 120)) {
-                    console.warn(`[Validation] Win probabilities sum to ${totalProb}, normalizing...`);
+                if (totalProb > 0 && totalProb !== 100) {
+                    console.warn(`[Validation] Win probabilities sum to ${totalProb}, normalizing to 100...`);
                     finalForecast.candidates.forEach(c => {
                         const prob = c.win_probability || c.winProbability || 0;
-                        c.win_probability = (prob / totalProb) * 100;
+                        c.win_probability = Math.round((prob / totalProb) * 100);
                     });
+                    
+                    const newSum = finalForecast.candidates.reduce((sum, c) => sum + (c.win_probability || 0), 0);
+                    if (newSum !== 100 && finalForecast.candidates.length > 0) {
+                        finalForecast.candidates[0].win_probability += (100 - newSum);
+                    }
+                }
+            } else if (finalForecast.election_status === 'completed') {
+                if (!finalForecast.actual_result || !finalForecast.actual_result.winner_name) {
+                    throw new Error("Completed election missing winner data.");
                 }
             }
         } catch (err) {
