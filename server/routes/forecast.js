@@ -104,6 +104,12 @@ STRATEGIC CONTEXT:
 Region: Bihar (243 seats, 122 for majority)
 Major Players: RJD (Rashtriya Janata Dal), JDU (Janata Dal United), BJP, INC.
 Key Leaders: Nitish Kumar, Tejashwi Yadav.`;
+        } else if (qLower.includes("punjab")) {
+            specificContext = `
+STRATEGIC CONTEXT:
+Region: Punjab (117 seats, 59 for majority)
+Major Players: AAP (Aam Aadmi Party), INC (Indian National Congress), SAD (Shiromani Akali Dal), BJP.
+Key Leaders: Bhagwant Mann (AAP), Amarinder Singh Raja Warring (INC), Sukhbir Singh Badal (SAD).`;
         } else if (qLower.includes("usa") || qLower.includes("united states") || qLower.includes("president")) {
              specificContext = `
 STRATEGIC CONTEXT:
@@ -196,8 +202,7 @@ For each candidate include these exact fields: name, party, win_probability, pro
 
 CRITICAL: DO NOT use placeholders like "Candidate 1", "Party A", "Generic Candidate", etc.
 You MUST identify the REAL names of the candidates and parties from the provided data or your training knowledge.
-For West Bengal, use real names like "TMC (Mamata Banerjee)" or "BJP (Suvendu Adhikari)".
-If you are unsure of a specific candidate name, use the PARTY name as the candidate name (e.g., "TMC Candidate").
+If you are unsure of a specific candidate name, use the PARTY name as the candidate name (e.g., "AAP Candidate", "TMC Candidate").
 Never return generic labels like "Candidate 1".
 
 win_probability values must sum to 100 across all returned candidates.
