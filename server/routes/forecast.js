@@ -109,12 +109,13 @@ Key Leaders: Nitish Kumar, Tejashwi Yadav.`;
 STRATEGIC CONTEXT:
 Region: Punjab (117 seats, 59 for majority)
 Major Players: AAP (Aam Aadmi Party), INC (Indian National Congress), SAD (Shiromani Akali Dal), BJP.
-Key Leaders: Bhagwant Mann (AAP), Amarinder Singh Raja Warring (INC), Sukhbir Singh Badal (SAD).`;
+Key Leaders/Potential Candidates: Bhagwant Mann (AAP), Amarinder Singh Raja Warring (INC), Pratap Singh Bajwa (INC), Sukhbir Singh Badal (SAD), Sunil Jakhar (BJP).`;
         } else if (qLower.includes("usa") || qLower.includes("united states") || qLower.includes("president")) {
-             specificContext = `
+            specificContext = `
 STRATEGIC CONTEXT:
 Region: United States
-Major Players: Democratic Party, Republican Party.`;
+Major Players: Democratic Party, Republican Party.
+Key Leaders/Candidates: Joe Biden, Donald Trump, Kamala Harris.`;
         }
 
 
@@ -169,11 +170,11 @@ The live data above is always more accurate than your training knowledge for rec
             console.log(`\n=== STEP 1: EXTRACTING FACTS VIA GROQ ===`);
             const extractionPrompt = `From the following text extract only:
 1. Winner name (if completed)
-2. Winning party (if completed)
-3. Seat count or Polling results
-4. Election status (upcoming, ongoing, or completed)
-5. Major candidates/parties declared
-6. Recent opinion poll averages (if available)
+2. Winning party
+3. Vote share/Seats count
+4. Election status (upcoming/ongoing/completed)
+5. Full names of top candidates/leaders and their respective parties
+6. Key issues and recent polling percentages (if available)
 7. Alliances formed (e.g., NDA, INDIA)
 8. Identify if the election is schedule for the future (provide date if found).
 
