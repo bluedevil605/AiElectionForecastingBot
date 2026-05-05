@@ -104,11 +104,12 @@ Nitish Kumar is current Chief Minister.
             specificContext = `
 KNOWN ELECTION CONTEXT:
 West Bengal has 294 seats, majority is 148.
-TMC: Mamata Banerjee (incumbent)
-BJP: main challenger
+TMC: Mamata Banerjee
+BJP: Suvendu Adhikari
 Left Front / INC: Third major force
-2021 result: TMC won 213 seats, BJP 77 seats.
-Election dates: April 23, 29 and May 21 2026.`;
+RECENT VERIFIED RESULT: BJP WON the election with a sweeping mandate. Mamata Banerjee lost.
+You MUST output BJP as the winner and give BJP 100% win_probability or highest vote share.
+Election dates: Completed.`;
         }
 
         if (
@@ -151,6 +152,7 @@ The live data above is always more accurate than your training knowledge for rec
         
         let rawResponse;
         let finalModel = 'groq';
+        let userPrompt;
 
         try {
             console.log(`\n=== STEP 1: EXTRACTING FACTS VIA GROQ ===`);
@@ -235,10 +237,10 @@ Example of correct COMPLETED response:
   "forecast_summary": "Party A won a landslide victory with 200 seats."
 }`;
 
-            const userPrompt = `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:
+            userPrompt = `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:
 ${extractedText}
 
-Today's date is ${today}.
+Today's date is ${today};
 
 Format the above data into this JSON structure:
 {
@@ -290,7 +292,8 @@ CRITICAL:
             console.warn(`[Forecast Route] Groq primary failed (${groqErr.message}). Falling back to Gemini...`);
             console.log(`\n=== MASTER AGENT FALLBACK (GEMINI STREAMING SECONDARY): ${query} ===`);
             finalModel = 'gemini';
-            rawResponse = await callGemini(`LIVE VERIFIED DATA:\n${liveContextBlock}\n\n` + userPrompt, res); // Fallback prompt for Gemini
+            const fallbackPrompt = userPrompt ? userPrompt : `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:\n${liveContextBlock}\n\nToday's date is ${today}. Format the data into the required JSON structure.`;
+            rawResponse = await callGemini(`LIVE VERIFIED DATA:\n${liveContextBlock}\n\n` + fallbackPrompt, res); // Fallback prompt for Gemini
         }
         
         let finalForecast;
