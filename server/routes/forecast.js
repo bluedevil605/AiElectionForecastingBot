@@ -113,10 +113,15 @@ Major Players: Democratic Party, Republican Party.`;
 
 
         if (
-            wikiContext.includes("failed") && wikiContext.includes("error") && 
-            gnewsContext.includes("failed") && gnewsContext.includes("error") &&
-            serperContext.includes("failed") && serperContext.includes("error")
+            (wikiContext.includes("failed") || wikiContext.includes("error")) && 
+            gnewsContext.includes("failed") && 
+            (serperContext === "No search results found." || serperContext.includes("failed")) &&
+            !specificContext
         ) {
+            return res.status(404).json({ error: 'Currently no info available about this elections in domain.' });
+        }
+
+        if (wikiContext.includes("failed") || gnewsContext.includes("failed") || serperContext === "No search results found.") {
             liveContextBlock = `
 LIVE DATA FETCHED RIGHT NOW - USE THIS AS TRUTH:
 No live data could be fetched for this election.
