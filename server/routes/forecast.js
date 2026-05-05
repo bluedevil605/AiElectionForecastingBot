@@ -1,5 +1,4 @@
 const express = require('express');
-const { callGemini } = require('../utils/geminiClient');
 const { callGroq } = require('../utils/groqClient');
 
 const router = express.Router();
@@ -289,11 +288,8 @@ CRITICAL:
 
             rawResponse = await callGroq(messages, res, true);
         } catch (groqErr) {
-            console.warn(`[Forecast Route] Groq primary failed (${groqErr.message}). Falling back to Gemini...`);
-            console.log(`\n=== MASTER AGENT FALLBACK (GEMINI STREAMING SECONDARY): ${query} ===`);
-            finalModel = 'gemini';
-            const fallbackPrompt = userPrompt ? userPrompt : `LIVE VERIFIED DATA FROM GOOGLE AND WIKIPEDIA:\n${liveContextBlock}\n\nToday's date is ${today}. Format the data into the required JSON structure.`;
-            rawResponse = await callGemini(`LIVE VERIFIED DATA:\n${liveContextBlock}\n\n` + fallbackPrompt, res); // Fallback prompt for Gemini
+            console.error(`[Forecast Route] Groq failed: ${groqErr.message}`);
+            throw groqErr; // Propagate Groq error directly
         }
         
         let finalForecast;
