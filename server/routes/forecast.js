@@ -89,6 +89,27 @@ router.post('/', async (req, res) => {
         let liveContextBlock = "";
         let specificContext = "";
 
+        // STRATEGIC INTELLIGENCE HINTS (Rule: No forced outcomes, just identifying players)
+        const qLower = query.toLowerCase();
+        if (qLower.includes("bengal")) {
+            specificContext = `
+STRATEGIC CONTEXT:
+Region: West Bengal (294 seats, 148 for majority)
+Major Players: TMC (All India Trinamool Congress), BJP (Bharatiya Janata Party), Left Front, Indian National Congress.
+Key Leaders: Mamata Banerjee (TMC), Suvendu Adhikari (BJP).`;
+        } else if (qLower.includes("bihar")) {
+            specificContext = `
+STRATEGIC CONTEXT:
+Region: Bihar (243 seats, 122 for majority)
+Major Players: RJD (Rashtriya Janata Dal), JDU (Janata Dal United), BJP, INC.
+Key Leaders: Nitish Kumar, Tejashwi Yadav.`;
+        } else if (qLower.includes("usa") || qLower.includes("united states") || qLower.includes("president")) {
+             specificContext = `
+STRATEGIC CONTEXT:
+Region: United States
+Major Players: Democratic Party, Republican Party.`;
+        }
+
 
         if (
             wikiContext.includes("failed") && wikiContext.includes("error") && 
@@ -166,11 +187,16 @@ No exceptions.
 You MUST return candidates array.
 This field is mandatory always.
 For each candidate include these exact fields: name, party, win_probability, projected_vote_share, momentum, status.
-win_probability values must sum to 100 across all returned candidates.
-momentum must be rising stable or falling.
-Never return empty candidates array ever.
 
-You MUST always return minimum 2 items in disruption_risks array. Never empty.
+CRITICAL: DO NOT use placeholders like "Candidate 1", "Party A", "Generic Candidate", etc.
+You MUST identify the REAL names of the candidates and parties from the provided data or your training knowledge.
+For West Bengal, use real names like "TMC (Mamata Banerjee)" or "BJP (Suvendu Adhikari)".
+If you are unsure of a specific candidate name, use the PARTY name as the candidate name (e.g., "TMC Candidate").
+Never return generic labels like "Candidate 1".
+
+win_probability values must sum to 100 across all returned candidates.
+momentum must be rising, stable or falling.
+Never return empty candidates array ever.
 
 If this election has NOT happened yet (UPCOMING/ONGOING):
 - Set election_status to upcoming or ongoing

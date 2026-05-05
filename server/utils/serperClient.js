@@ -23,18 +23,17 @@ async function fetchSerperContext(query) {
         }
 
         const queries = [
-            `${query} winner declared result ${suffix}`.trim(),
-            `${query} final seat count ${suffix}`.trim(),
-            `${query} Election Commission ${suffix}`.trim(),
-            `${query} opinion poll survey ${suffix}`.trim(),
-            `${query} candidates declared ${suffix}`.trim(),
-            `${query} prediction forecast ${suffix}`.trim(),
-            `${query} alliance seat sharing ${suffix}`.trim()
+            `${query} election 2026 candidates list`.trim(),
+            `${query} assembly election news update`.trim(),
+            `${query} main political parties contenders`.trim(),
+            `${query} opinion poll survey current`.trim(),
+            `${query} alliance formation news`.trim(),
+            `${query} winner prediction forecast`.trim()
         ];
 
         if (isIndian) {
-            queries.push(`${query} BJP INC TMC survey`.trim());
-            queries.push(`${query} NDA INDIA alliance survey`.trim());
+            queries.push(`${query} BJP TMC INC candidates`.trim());
+            queries.push(`${query} NDA INDIA alliance Bengal UP Bihar`.trim());
         }
 
         console.log(`[SerperClient] Executing ${queries.length} parallel queries:`);
